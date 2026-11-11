@@ -403,7 +403,7 @@ footer a:hover{color:var(--ink)}
   </div>
 
   <div class="in sec">
-    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>What we're building today</h2></div><p class="lead">Road and drainage works on Olowu Street, Bogije, Ibeju-Lekki. The photos step through the job on their own. Tap a stage to jump to it.</p></div>
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>What we're building today</h2></div><p class="lead">Road and drainage works in Bogije, Ibeju-Lekki. The photos step through the job on their own. Tap a stage to jump to it.</p></div>
     <div data-live></div>
     <div class="sites" data-sites></div>
   </div>
@@ -496,7 +496,7 @@ footer a:hover{color:var(--ink)}
     <blockquote class="quote"><p>At Uriel, we do more than build structures. We develop lasting assets that create value, enhance communities and stand the test of time, through professionalism, integrity and excellence.</p></blockquote>
   </div>
   <div class="in sec">
-    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>Olowu Street, Bogije</h2></div><p class="lead">Road and drainage works in Ibeju-Lekki, from the first community walk to the finished drains.</p></div>
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>Bogije road and drainage</h2></div><p class="lead">Road and drainage works in Ibeju-Lekki, from the first community walk to the finished drains.</p></div>
     <div data-live></div>
   </div>
   <div class="in sec">
@@ -685,7 +685,7 @@ const P=[
  {id:'dyo',biz:'p',st:'done',name:'Dyo Korones Court',loc:'Victoria Island',yr:'2023',d:'8 three-bedroom and 2 two-bedroom flats.',photos:imgs('dyo',4)},
  {id:'virgo',biz:'p',st:'done',name:'Virgopoint Court',loc:'Shoreline Estate, Ikoyi',yr:'2022',d:'4 three-bedroom flats and 2 four-bedroom maisonettes.',photos:imgs('virgo',5)},
  {id:'vienna',biz:'p',st:'done',name:'Vienna Manilla Court',loc:'Lekki Phase 1',yr:'2022',d:'8 three-bedroom flats and 2 four-bedroom maisonettes.',photos:imgs('vienna',2)},
- {id:'bogije',biz:'c',cat:'road',st:'build',name:'Olowu Street road and drainage',loc:'Bogije, Ibeju-Lekki',yr:'Ongoing',d:'Reinforced-concrete side drains with covers, excavation and road works.',photos:imgs('bogije',7)},
+ {id:'bogije',biz:'c',cat:'road',st:'build',name:'Bogije road and drainage',loc:'Bogije, Ibeju-Lekki',yr:'Ongoing',d:'Reinforced-concrete side drains with covers, excavation and road works in Bogije.',photos:imgs('bogije',7)},
  {id:'agege',biz:'c',cat:'road',st:'build',name:'Road construction, Agege',loc:'Agege, Lagos',yr:'Under construction',d:'Side drains, grading, compaction and asphalt surfacing.',photos:imgs('agege',5)},
  {id:'ibadan',biz:'c',cat:'road',st:'done',name:'Road construction, Ibadan',loc:'Ibadan, Oyo State',yr:'Oyo State',d:'Asphalt dual carriageway with paved median, street lights and concrete drainage.',photos:imgs('ibadan',3)},
  {id:'ikotun',biz:'c',cat:'school',st:'done',name:'18-classroom block, GTC Ikotun',loc:'Ikotun, Lagos',yr:'2020',d:'New classroom block for Government Technical College. Client: LASTVEB.',photos:imgs('ikotun',7)},
@@ -827,8 +827,8 @@ const STAGES=[['Community walk','The team walks the route with residents and com
 const LN=STAGES.length,lives=[];
 $$('[data-live]').forEach((el,n)=>{
   el.className='live';
-  el.innerHTML=`<div class="stage"><span class="ct"></span>${PI.bogije.photos.map((s,i)=>`<img src="${s}" alt="Olowu Street, stage ${i+1}: ${STAGES[i][0]}" data-i="${i}" loading="lazy">`).join('')}<span class="prog"><i></i></span></div>
-  <div class="side"><div class="stack" style="gap:4px"><span class="mono">Uriel Construction · Bogije, Ibeju-Lekki</span><h3>Olowu Street road and drainage</h3></div>
+  el.innerHTML=`<div class="stage"><span class="ct"></span>${PI.bogije.photos.map((s,i)=>`<img src="${s}" alt="Bogije road, stage ${i+1}: ${STAGES[i][0]}" data-i="${i}" loading="lazy">`).join('')}<span class="prog"><i></i></span></div>
+  <div class="side"><div class="stack" style="gap:4px"><span class="mono">Uriel Construction · Bogije, Ibeju-Lekki</span><h3>Bogije road and drainage</h3></div>
   <ol class="track">${STAGES.map(([t,d],i)=>`<li><button type="button" data-i="${i}"><b>${String(i+1).padStart(2,'0')}</b><span><strong>${t}</strong>${d}</span></button></li>`).join('')}</ol>
   <div class="scrub"><button class="b" type="button" data-step="-1" aria-label="Previous stage">←</button><input type="range" min="0" max="${LN-1}" value="0" aria-label="Construction stage"><button class="b" type="button" data-step="1" aria-label="Next stage">→</button></div></div>`;
   const L={el,si:0,auto:null};
