@@ -455,7 +455,7 @@ footer a:hover{color:var(--ink)}
     <div class="sites" data-sites="nophoto" style="margin-top:22px"></div>
   </div>
   <div class="in sec">
-    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Track record</div><h2>Selected residential projects</h2></div><p class="lead" data-homesum></p></div>
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Track record</div><h2 data-homesum></h2></div></div>
     <div class="rlist" data-homes></div>
   </div>
   <div class="in sec">
@@ -802,7 +802,7 @@ $('[data-sites="nophoto"]').innerHTML=P.filter(p=>p.biz==='p'&&p.st==='build'&&!
 function row(r){return `<div class="rrow"><span class="yr">${r.y}</span><div><div class="nm">${esc(r.n)}</div><div class="ds">${esc(r.d)} · ${esc(r.l)}</div>${r.c?`<div class="cl">Client: ${esc(r.c)}</div>`:''}</div><span class="tag">${CAT[r.cat]}</span>${r.ph?`<button class="ph" type="button" data-open="${r.ph}">View photos (${PI[r.ph].photos.length})</button>`:''}</div>`;}
 const SELECTED=['Vive Court','Jummy Court','Vitro Court','Cypress Court','Crescent-Cross Court','Virgopoint Court','Vienna Manilla Court','Dyo Korones Court'];
 const homesRev=HOMES.slice().reverse(),homesSel=homesRev.filter(r=>SELECTED.includes(r.n));let homesAll=false;
-$('[data-homesum]').textContent=`${HOMES.length} developments and ${units}+ homes in Ikoyi, Victoria Island and Lekki since 2009.`;
+$('[data-homesum]').textContent=`${units}+ homes in Ikoyi, Victoria Island and Lekki since 2009`;
 function drawHomes(){const L=homesAll?homesRev:homesSel;$('[data-homes]').innerHTML=L.map(row).join('')+`<div class="more"><button class="b" type="button" id="homesMore">${homesAll?'Show selected projects':'Show all '+HOMES.length+' developments'}</button></div>`;$('#homesMore').onclick=()=>{homesAll=!homesAll;drawHomes();};}
 drawHomes();
 
