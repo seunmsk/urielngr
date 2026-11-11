@@ -200,6 +200,34 @@ nav.main a.cta{background:var(--orange);color:#fff;border-bottom-color:var(--ora
 .types .t small{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--slab-muted);text-transform:uppercase}
 @media (max-width:560px){.types{grid-template-columns:minmax(0,1fr)}.types img{min-height:200px;max-height:240px}}
 
+
+/* Now at Uriel carousel */
+.now{background:var(--sheet);border:1px solid var(--ink);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-areas:"st tx" "tb tb"}
+@media (max-width:900px){.now{grid-template-columns:minmax(0,1fr);grid-template-areas:"st" "tx" "tb"}}
+.now .nst{grid-area:st;position:relative;min-height:380px;overflow:hidden;background:#111;cursor:zoom-in;touch-action:pan-y}
+@media (max-width:900px){.now .nst{min-height:0;aspect-ratio:4/3}}
+.now .nst img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease,transform 7s ease;transform:scale(1.06)}
+.now .nst img.on{opacity:1;transform:scale(1)}
+@media (prefers-reduced-motion:reduce){.now .nst img{transition:none;transform:none}}
+.now .nst .tag{position:absolute;left:12px;top:12px;z-index:1;background:var(--sheet);color:var(--ink);font:500 10.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:8px 10px;display:inline-flex;gap:8px;align-items:center}
+.now .nst .cnt{position:absolute;right:12px;bottom:12px;z-index:1;background:rgba(20,20,22,.78);color:#fff;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:7px 9px}
+.now .ntx{grid-area:tx;padding:clamp(18px,3vw,30px);display:flex;flex-direction:column;gap:14px;min-width:0;justify-content:center}
+.now .ntx h3{font-size:clamp(28px,3.4vw,38px)}
+.now .ntx p{color:var(--muted);font-size:16.5px;max-width:46ch}
+.now .ntx .row{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.now .ntx.swap{animation:enter .45s ease both}
+.now .ntb{grid-area:tb;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border-top:1px solid var(--ink)}
+@media (max-width:620px){.now .ntb{display:flex;overflow-x:auto;scrollbar-width:none}.now .ntb::-webkit-scrollbar{display:none}.now .ntb button{flex:0 0 62%}}
+.now .ntb button{position:relative;text-align:left;background:transparent;border:0;border-right:1px solid var(--rule);padding:14px 14px 16px;font:inherit;color:var(--muted);cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0}
+.now .ntb button:last-child{border-right:0}
+.now .ntb button small{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;gap:6px;align-items:center}
+.now .ntb button span{font-family:var(--display);font-size:18px;line-height:1.15}
+.now .ntb button:hover{color:var(--ink)}
+.now .ntb button[aria-selected="true"]{color:var(--ink);background:color-mix(in srgb,var(--dc) 7%,transparent)}
+.now .ntb button i.bar{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--dc)}
+.now .ntb button[aria-selected="true"] i.bar{width:100%;transition:width var(--dur,6s) linear}
+.now.paused .ntb button[aria-selected="true"] i.bar{transition:none}
+
 /* Live stepper */
 .live{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);background:var(--sheet);border:1px solid var(--ink)}
 @media (max-width:900px){.live{grid-template-columns:minmax(0,1fr)}}
@@ -409,9 +437,8 @@ footer a:hover{color:var(--ink)}
   </div>
 
   <div class="in sec">
-    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>What we're building today</h2></div><p class="lead">Road and drainage works in Bogije, Ibeju-Lekki. The photos step through the job on their own. Tap a stage to jump to it.</p></div>
-    <div data-live></div>
-    <div class="sites" data-sites></div>
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">Now at Uriel</span></div><h2>What we're working on</h2></div><p class="lead">The latest from across the group. It moves on by itself; tap any item to jump to it, or the photo to see more.</p></div>
+    <div class="now" id="now" aria-roledescription="carousel" aria-label="What we're working on"></div>
   </div>
 
   <div class="in sec">
@@ -796,7 +823,6 @@ chipBar($('[data-chips="con"]'),[['all','All',CONS.length],['road','Roads'],['sc
 const CRANE='<svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M30 86V10M30 10h80M30 10l-14 12M30 10l16 12M100 10v24M95 34h10v8H95zM12 86h104"/></svg>';
 const siteRow=p=>p.photos.length?`<button class="site" type="button" data-open="${p.id}"><span class="th"><img src="${p.photos[0]}" alt="" loading="lazy"></span><span><strong>${esc(p.name)}</strong><small>${esc(p.loc)} · ${p.photos.length} photos</small></span></button>`
   :`<div class="site"><span class="th">${CRANE}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.loc)} · ${esc(p.d)} Photos coming.</small></span></div>`;
-$('[data-sites]:not([data-sites="nophoto"])').innerHTML=P.filter(p=>p.st==='build'&&p.id!=='bogije').map(siteRow).join('');
 $('[data-sites="nophoto"]').innerHTML=P.filter(p=>p.biz==='p'&&p.st==='build'&&!p.photos.length).map(siteRow).join('');
 
 /* ---------- Homes list ---------- */
@@ -832,6 +858,44 @@ $('#partners').innerHTML=[['TotalEnergies','totalenergies','International energy
 
 /* ---------- Oil and gas products ---------- */
 $('#prods').innerHTML=[['Crude oil',''],['Naphtha',''],['Premium motor spirit','PMS'],['Dual purpose kerosene','DPK'],['Aviation turbine kerosene','ATK'],['Gasoil','AGO'],['Fuel oil',''],['Liquefied natural gas','LNG'],['Liquefied petroleum gas','LPG']].map(([n,a])=>`<span class="prod">${a?`<b>${a}</b>`:''}${n}</span>`).join('');
+
+
+/* ---------- Now at Uriel (home carousel). Add an item here for anything new in any company. ---------- */
+const CO={p:['Uriel Properties','p-c','#properties'],c:['Uriel Construction','c-c','#construction'],g:['Uriel Oil and Gas','g-c','#oilgas'],f:['Uriel Farms','f-c','#farms'],v:['Uriel Integrated Ventures','v-c','#ventures']};
+const NOW=[
+ {id:'bogije',co:'c',title:'Bogije road and drainage',text:'Road and drainage works in Bogije, Ibeju-Lekki. Excavation, reinforcement and concrete drains are under way, with precast covers going on.',img:4},
+ {id:'precinct',co:'p',title:'The Uriel Precinct',text:'154 detached five-bedroom homes on Ostia Island, Lekki Foreshore, each with its own pool and C of O. Construction is under way.',cta:['Register interest','#contact','precinct']},
+ {id:'bourd',co:'p',title:'22 Bourdillon',text:'The structure is up in Ikoyi. Stone cladding, glazing and balconies are going in.'},
+ {id:'banana',co:'p',title:'Banana Island',text:'Semi-detached homes on Banana Island. The four-storey blocks are up with windows in.'},
+ {id:'bedwell',co:'p',title:'Bedwell',text:'Mixed residential in Ikoyi. The blocks are up and rendered, with scaffolding still in place.'}
+];
+(function(){
+  const el=$('#now');if(!el)return;const D=6000;let ni=0,timer=null,paused=false;
+  el.style.setProperty('--dur',D+'ms');
+  el.innerHTML=`<div class="nst">${NOW.map((n,i)=>`<img src="${PI[n.id].photos[n.img||0]}" alt="${esc(n.title)}" data-i="${i}" ${i?'loading="lazy"':''}>`).join('')}<span class="tag"></span><span class="cnt"></span></div>
+   <div class="ntx" aria-live="polite"></div>
+   <div class="ntb" role="tablist" aria-label="Choose an update">${NOW.map((n,i)=>`<button type="button" role="tab" class="${CO[n.co][1]}" data-i="${i}"><i class="bar"></i><small><i class="dot"></i>${esc(CO[n.co][0].replace('Uriel ',''))}</small><span>${esc(n.title)}</span></button>`).join('')}</div>`;
+  const tx=el.querySelector('.ntx');
+  function go(i,user){ni=(i+NOW.length)%NOW.length;const n=NOW[ni],p=PI[n.id],c=CO[n.co];
+    el.querySelectorAll('.nst img').forEach(im=>{const on=+im.dataset.i===ni;im.classList.toggle('on',on);if(on)im.loading='eager';});
+    el.querySelector('.tag').innerHTML=`<i class="dot" style="background:var(--${{p:'c-prop',c:'c-con',g:'c-gas',f:'c-farm',v:'c-vent'}[n.co]})"></i>${esc(c[0])}`;
+    el.querySelector('.cnt').textContent=`${p.photos.length} photo${p.photos.length>1?'s':''}`;
+    tx.className='ntx '+c[1];void tx.offsetWidth;tx.classList.add('swap');
+    tx.innerHTML=`<span class="mono" style="display:inline-flex;gap:8px;align-items:center"><i class="dot"></i>${esc(c[0])} · ${esc(p.loc)}</span><h3>${esc(n.title)}</h3><p>${esc(n.text)}</p>
+      <div class="row"><span class="pill ${p.st}">${STL[p.st]}</span><span class="mono">${ni+1} of ${NOW.length}</span></div>
+      <div class="btns"><button class="b solid" type="button" data-open="${n.id}">View photos</button>${n.cta?`<a class="b" href="${n.cta[1]}" data-topic="${n.cta[2]}">${n.cta[0]}</a>`:`<a class="b" href="${c[2]}">${esc(c[0])} →</a>`}</div>`;
+    el.querySelectorAll('.ntb button').forEach(b=>{const on=+b.dataset.i===ni;b.setAttribute('aria-selected',on);b.querySelector('.bar').style.transition='none';b.querySelector('.bar').offsetWidth;b.querySelector('.bar').style.transition='';if(on&&user)b.scrollIntoView({block:'nearest',inline:'nearest'});});
+    restart();}
+  function restart(){clearTimeout(timer);if(paused||reduceNow||el.closest('.view').hidden)return;timer=setTimeout(()=>go(ni+1),D);}
+  const reduceNow=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  el.querySelector('.ntb').addEventListener('click',e=>{const b=e.target.closest('button');if(b)go(+b.dataset.i,true);});
+  let swiped=false;el.querySelector('.nst').addEventListener('click',()=>{if(swiped){swiped=false;return;}openLB(NOW[ni].id,NOW[ni].img||0);});
+  const pause=v=>{paused=v;el.classList.toggle('paused',v);if(v)clearTimeout(timer);else restart();};
+  el.addEventListener('mouseenter',()=>pause(true));el.addEventListener('mouseleave',()=>pause(false));
+  el.addEventListener('focusin',()=>pause(true));el.addEventListener('focusout',()=>pause(false));
+  let sx=null;const st=el.querySelector('.nst');st.addEventListener('pointerdown',e=>{sx=e.clientX;});st.addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){swiped=true;go(ni+(dx<0?1:-1),true);}});
+  window.nowRestart=restart;go(0);
+})();
 
 /* ---------- Live stepper (one per page that has [data-live]) ---------- */
 const STAGES=[['Community walk','The team walks the route with residents and community leaders.'],['Plan review','Engineers check the drawings against the street.'],['Excavation','Excavators open the trench for the new side drain.'],['Reinforcement','Steel is laid in the drain base.'],['Formwork','Timber forms go up for the drain walls.'],['Concrete pour','Concrete is poured into the reinforced forms.'],['Drain covers','The finished drain is closed with precast slabs.']];
@@ -877,7 +941,7 @@ const DC={home:'--orange',properties:'--c-prop',construction:'--c-con',oilgas:'-
 let jumpTo=null;
 document.addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:reduce?'auto':'smooth'});});
 function show(){let v=location.hash.slice(1);if(!VIEWS.includes(v))v='home';
-  $$('.view').forEach(el=>{const on=el.dataset.view===v;el.hidden=!on;el.classList.remove('enter');if(on){void el.offsetWidth;el.classList.add('enter');runCounts(el);startLives(el);}});
+  $$('.view').forEach(el=>{const on=el.dataset.view===v;el.hidden=!on;el.classList.remove('enter');if(on){void el.offsetWidth;el.classList.add('enter');runCounts(el);startLives(el);if(window.nowRestart)setTimeout(window.nowRestart,0);}});
   $$('[data-nav]').forEach(a=>{if(a.dataset.nav===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   document.documentElement.style.setProperty('--dc',`var(${DC[v]})`);
   const cur=$(`nav.main a[data-nav="${v}"]`);if(cur)cur.scrollIntoView({block:'nearest',inline:'nearest'});
