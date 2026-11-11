@@ -225,7 +225,7 @@ nav.main a.cta{background:var(--orange);color:#fff;border-bottom-color:var(--ora
 .now .ntb button:hover{color:var(--ink)}
 .now .ntb button[aria-selected="true"]{color:var(--ink);background:color-mix(in srgb,var(--dc) 7%,transparent)}
 .now .ntb button i.bar{position:absolute;left:0;top:-1px;height:3px;width:0;background:var(--dc)}
-.now .ntb button[aria-selected="true"] i.bar{width:100%;transition:width var(--dur,6s) linear}
+.now .ntb button[aria-selected="true"] i.bar{width:100%;transition:width var(--dur,5s) linear}
 .now.paused .ntb button[aria-selected="true"] i.bar{transition:none}
 
 /* Live stepper */
@@ -870,7 +870,7 @@ const NOW=[
  {id:'bedwell',co:'p',title:'Bedwell',text:'Mixed residential in Ikoyi. The blocks are up and rendered, with scaffolding still in place.'}
 ];
 (function(){
-  const el=$('#now');if(!el)return;const D=6000;let ni=0,timer=null,paused=false;
+  const el=$('#now');if(!el)return;const D=5000;let ni=0,timer=null,paused=false;
   el.style.setProperty('--dur',D+'ms');
   el.innerHTML=`<div class="nst">${NOW.map((n,i)=>`<img src="${PI[n.id].photos[n.img||0]}" alt="${esc(n.title)}" data-i="${i}" ${i?'loading="lazy"':''}>`).join('')}<span class="tag"></span><span class="cnt"></span></div>
    <div class="ntx" aria-live="polite"></div>
