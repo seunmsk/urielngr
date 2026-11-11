@@ -1,0 +1,872 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Uriel | Homes, roads and energy for Nigeria</title>
+<meta name="description" content="Uriel is a Lagos group of five companies: Uriel Properties, Uriel Construction, Uriel Oil and Gas, Uriel Farms and Uriel Integrated Ventures. 19 Bishop Kale Close, Victoria Island.">
+<meta name="theme-color" content="#262628">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Uriel">
+<meta property="og:title" content="Uriel | Homes, roads and energy for Nigeria">
+<meta property="og:description" content="Properties, construction, oil and gas, farms and integrated ventures. Victoria Island, Lagos.">
+<meta property="og:image" content="/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Barlow:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky header naming all five companies → hash-routed pages. Every company page uses the same template: head (copy + photo) → facts strip → what we do → work → company-specific detail → next company. Uriel orange on graphite; each company keeps a small colour marker only. */
+:root{
+  --paper:#efeeec;
+  --sheet:#fbfbfa;
+  --ink:#262628;
+  --muted:#6b6a6e;
+  --rule:rgba(38,38,40,.14);
+  --orange:#fe6404;
+  --orange-ink:#c44c00;
+  --c-prop:#fe6404;
+  --c-con:#d99a00;
+  --c-gas:#1f5f8b;
+  --c-farm:#3c7a3a;
+  --c-vent:#6b4fa0;
+  --slab:#262628;
+  --slab-2:#323235;
+  --slab-ink:#f4f3f1;
+  --slab-muted:#b3b2b6;
+  --ok:#2f7d4a;
+  --wa:#1f8f52;
+  --display:"Gloock","Canela",Georgia,"Times New Roman",serif;
+  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --dc:var(--orange);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1d1d1f;--sheet:#28282b;--ink:#ededee;--muted:#a4a3a8;--rule:rgba(237,237,238,.14);--orange-ink:#ff8a3d;--c-con:#f2c230;--c-gas:#5fa3d6;--c-farm:#6fb36a;--c-vent:#a58be0;--slab:#141415;--slab-2:#232325;--ok:#6fc28c;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#1d1d1f;--sheet:#28282b;--ink:#ededee;--muted:#a4a3a8;--rule:rgba(237,237,238,.14);--orange-ink:#ff8a3d;--c-con:#f2c230;--c-gas:#5fa3d6;--c-farm:#6fb36a;--c-vent:#a58be0;--slab:#141415;--slab-2:#232325;--ok:#6fc28c;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{background:var(--paper);color:var(--ink)}
+body{font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--sheet)}
+img{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.in{max-width:1200px;margin:0 auto}
+.lg-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lg-dark{display:inline}:root:not([data-theme="light"]) .lg-light{display:none}}
+:root[data-theme="dark"] .lg-dark{display:inline}:root[data-theme="dark"] .lg-light{display:none}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.012em;text-wrap:balance;margin:0}
+h1{font-size:clamp(40px,6vw,74px);line-height:1}
+h2{font-size:clamp(30px,4.2vw,46px);line-height:1.02}
+h3{font-size:24px;line-height:1.1}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:14px;min-width:0}
+.p-c{--dc:var(--c-prop)}.c-c{--dc:var(--c-con)}.g-c{--dc:var(--c-gas)}.f-c{--dc:var(--c-farm)}.v-c{--dc:var(--c-vent)}
+.dot{width:10px;height:10px;background:var(--dc);display:inline-block;flex:none}
+.kicker{display:flex;align-items:center;gap:10px}
+
+/* Header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:1px solid var(--rule)}
+header.top .in{display:flex;align-items:center;gap:24px;height:66px}
+.brand{line-height:0;flex:none}.brand img{width:80px;height:auto}
+nav.main{display:flex;gap:2px;margin-left:auto;overflow-x:auto;scrollbar-width:none;min-width:0;align-items:center}
+nav.main::-webkit-scrollbar{display:none}
+nav.main a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding:10px 11px;color:var(--muted);white-space:nowrap;border-bottom:2px solid transparent;display:inline-flex;align-items:center;gap:7px}
+nav.main a .dot{width:7px;height:7px}
+nav.main a:hover{color:var(--ink)}
+nav.main a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--dc)}
+nav.main a.cta{background:var(--orange);color:#fff;border-bottom-color:var(--orange);margin-left:8px}
+@media (max-width:900px){header.top .in{flex-wrap:wrap;height:auto;padding-block:8px;gap:4px}nav.main{margin-left:0;width:100%}nav.main a{padding:8px 8px;font-size:10.5px}}
+.band{height:4px;background:linear-gradient(90deg,var(--c-prop) 0 40%,var(--c-con) 40% 55%,var(--c-gas) 55% 70%,var(--c-farm) 70% 85%,var(--c-vent) 85% 100%)}
+
+/* Views */
+.view{padding-block:0 0}
+.view.enter{animation:enter .45s ease both}
+@keyframes enter{from{opacity:.001;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view.enter{animation:none}}
+.sec{padding-block:64px}
+.sec+.sec{border-top:1px solid var(--rule)}
+.sechead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 40px;align-items:end;margin-bottom:26px}
+.sechead .lead{color:var(--muted);max-width:52ch;justify-self:end}
+@media (max-width:820px){.sechead{grid-template-columns:minmax(0,1fr)}.sechead .lead{justify-self:start}}
+
+/* Buttons, chips, pills */
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.b{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--ink);border:1px solid currentColor;padding:12px 16px;background:transparent;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.b.solid{background:var(--orange);border-color:var(--orange);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--rule);padding:9px 11px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.chip .n{opacity:.6;font-variant-numeric:tabular-nums}
+.pill{font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:5px 7px;display:inline-flex;gap:6px;align-items:center;white-space:nowrap;border:1px solid currentColor;max-width:100%}
+.pill::before{content:"";width:7px;height:7px;flex:none;background:currentColor;border-radius:50%}
+.pill.live,.pill.build{color:var(--orange-ink)}.pill.done{color:var(--ok)}.pill.design{color:var(--muted)}
+.pill.build::before{animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.pill.build::before{animation:none}}
+
+/* Home hero with group board */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:44px;align-items:start;padding-block:48px 40px}
+@media (max-width:920px){.hero{grid-template-columns:minmax(0,1fr);gap:28px}}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .lede{font-size:18px;max-width:52ch}
+.board{background:var(--sheet);border:1px solid var(--ink)}
+.board .cap{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--ink)}
+.drow{display:grid;grid-template-columns:4px minmax(0,1fr) 120px;text-decoration:none;border-bottom:1px solid var(--rule);min-height:98px;transition:background .2s}
+.drow:last-child{border-bottom:0}
+.drow::before{content:"";background:var(--dc);transform:scaleY(.35);transition:transform .25s}
+.drow:hover::before,.drow:focus-visible::before{transform:none}
+.drow:hover{background:color-mix(in srgb,var(--dc) 6%,transparent)}
+.drow .txt{padding:14px 16px;display:flex;flex-direction:column;gap:3px;justify-content:center;min-width:0}
+.drow h3{font-size:clamp(23px,2.6vw,28px)}
+.drow p{color:var(--muted);font-size:14.5px}
+.drow .pic{border-left:1px solid var(--rule);overflow:hidden;display:grid;place-items:center;color:var(--dc);background:var(--paper)}
+.drow .pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.drow:hover .pic img{transform:scale(1.06)}
+.drow .pic svg{width:58%}
+.drow .go{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.drow:hover .go{color:var(--ink)}
+@media (max-width:520px){.drow{grid-template-columns:4px minmax(0,1fr) 92px}}
+
+/* Facts strip (count-up) */
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.facts div{padding:16px 12px 18px 0;display:flex;flex-direction:column;gap:2px;min-width:0}
+.facts strong{font-family:var(--display);font-weight:400;font-size:clamp(34px,4.6vw,50px);line-height:1;font-variant-numeric:tabular-nums}
+.facts small{color:var(--muted);font-size:14px}
+
+/* Company page head (shared template) */
+.chead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center;padding-block:44px 32px}
+@media (max-width:900px){.chead{grid-template-columns:minmax(0,1fr);gap:24px}}
+.chead .eyebrow{display:flex;align-items:center;gap:10px}
+.chead h1 em{font-style:normal;color:var(--dc)}
+.chead .lede{font-size:18px;max-width:52ch}
+.chead .art{position:relative;background:var(--sheet);border:1px solid var(--ink);overflow:hidden;aspect-ratio:4/3;max-width:100%;display:grid;place-items:center;color:var(--dc)}
+.chead .art img{width:100%;height:100%;object-fit:cover;display:block}
+.chead .art .cap{position:absolute;left:0;bottom:0;background:var(--sheet);color:var(--ink);font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:8px 10px}
+.chead .art svg{width:55%;max-width:280px}
+
+/* What we do */
+.ticks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:0 24px;border-top:1px solid var(--rule)}
+.ticks li{padding:12px 0;border-bottom:1px solid var(--rule);display:flex;gap:12px;align-items:baseline}
+.ticks li::before{content:"";width:7px;height:7px;background:var(--dc);flex:none;transform:translateY(-2px)}
+
+/* Project cards */
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr))}
+.pc{background:var(--sheet);border:1px solid var(--rule);display:flex;flex-direction:column;min-width:0;text-align:left;font:inherit;color:inherit;padding:0;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s}
+.pc:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 10px 24px -16px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion:reduce){.pc:hover{transform:none}}
+.pc .ph{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper);max-width:100%}
+.pc .ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.pc:hover .ph img{transform:scale(1.04)}
+.pc .ph .cnt{position:absolute;right:8px;bottom:8px;background:rgba(20,20,22,.78);color:#fff;font:500 10.5px/1 var(--mono);letter-spacing:.08em;padding:6px 8px;text-transform:uppercase}
+.pc .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pc .tl{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.pc p{color:var(--muted);font-size:15px}
+.pc .meta{margin-top:auto;padding-top:8px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;gap:10px}
+.pc .meta .go{color:var(--orange-ink)}
+.grid .pc{animation:enter .35s ease both}
+.empty-note{color:var(--muted);padding:20px 0}
+
+/* Flagship */
+.flag{background:var(--slab);color:var(--slab-ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+@media (max-width:900px){.flag{grid-template-columns:minmax(0,1fr)}}
+.flag .txt{padding:clamp(22px,4vw,44px);display:flex;flex-direction:column;gap:18px}
+.flag .mono{color:var(--slab-muted)}
+.flag h2 em{font-style:normal;color:var(--orange)}
+.flag p{color:var(--slab-muted);max-width:48ch}
+.flag .b{color:var(--slab-ink)}.flag .b.solid{color:#fff}
+.flag .ff{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.16)}
+.flag .ff div{padding:12px 10px 0 0}
+.flag .ff strong{display:block;font-family:var(--display);font-weight:400;font-size:30px;line-height:1.05}
+.flag .ff small{color:var(--slab-muted);font-size:13px}
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;background:var(--slab)}
+.types button{padding:0;border:0;background:var(--slab-2);color:var(--slab-ink);display:flex;flex-direction:column;cursor:zoom-in;text-align:left;font:inherit;overflow:hidden}
+.types img{width:100%;flex:1;min-height:260px;object-fit:cover;display:block;transition:transform .5s}
+.types button:hover img{transform:scale(1.04)}
+.types .t{padding:12px 12px 14px;display:flex;flex-direction:column;gap:2px;position:relative;background:var(--slab-2)}
+.types .t b{font-family:var(--display);font-weight:400;font-size:24px}
+.types .t small{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--slab-muted);text-transform:uppercase}
+@media (max-width:560px){.types{grid-template-columns:minmax(0,1fr)}.types img{min-height:200px;max-height:240px}}
+
+/* Live stepper */
+.live{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);background:var(--sheet);border:1px solid var(--ink)}
+@media (max-width:900px){.live{grid-template-columns:minmax(0,1fr)}}
+.live .stage{position:relative;background:#111;min-height:340px;overflow:hidden;cursor:zoom-in}
+.live .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease}
+.live .stage img.on{opacity:1}
+.live .stage .ct{position:absolute;left:12px;top:12px;z-index:1;background:rgba(20,20,22,.8);color:#fff;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:7px 9px}
+.live .stage .prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(255,255,255,.2);z-index:1}
+.live .stage .prog i{display:block;height:100%;background:var(--orange);transition:width .4s}
+@media (max-width:900px){.live .stage{aspect-ratio:4/3;min-height:0}}
+.live .side{padding:20px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.track{list-style:none;margin:0;padding:0}
+.track button{width:calc(100% - 6px);display:grid;grid-template-columns:24px 1fr;gap:10px;text-align:left;background:transparent;border:0;border-left:2px solid var(--rule);padding:7px 0 7px 12px;font:inherit;font-size:15px;color:var(--muted);cursor:pointer;margin-left:6px}
+.track b{font-family:var(--mono);font-size:11px;font-weight:500;padding-top:3px}
+.track strong{display:block;font-weight:600;color:var(--ink)}
+.track button.past{border-left-color:var(--orange)}
+.track button[aria-current="step"]{border-left-color:var(--orange);color:var(--ink);background:color-mix(in srgb,var(--orange) 9%,transparent)}
+.scrub{display:flex;gap:10px;align-items:center}
+.scrub input{flex:1;min-width:0;accent-color:var(--orange)}
+.scrub .b{padding:9px 12px}
+.sites{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));border-top:2px solid var(--ink)}
+.site{display:grid;grid-template-columns:60px minmax(0,1fr);gap:12px;align-items:center;padding:12px 12px 12px 0;border:0;border-bottom:1px solid var(--rule);background:transparent;font:inherit;color:inherit;text-align:left}
+button.site{cursor:pointer}
+button.site:hover strong{color:var(--orange-ink)}
+.site .th{width:60px;height:60px;background:var(--sheet);overflow:hidden;display:grid;place-items:center;color:var(--muted)}
+.site .th img{width:100%;height:100%;object-fit:cover}
+.site .th svg{width:32px}
+.site strong{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.1;display:block}
+.site small{color:var(--muted);font-size:13.5px}
+
+/* Record */
+.yrs{background:var(--sheet);border:1px solid var(--ink);padding:14px 14px 6px;overflow-x:auto}
+.yrs svg{display:block;width:100%;min-width:560px;height:auto}
+.yrs .bar{cursor:pointer}
+.yrs text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+.yrs .sel text{fill:var(--ink)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;padding:6px 0 8px;align-items:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:10px;height:10px;display:inline-block}
+.rec{display:grid;gap:16px}
+.rlist{border:1px solid var(--ink);background:var(--sheet)}
+.rrow{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:6px 16px;padding:12px 14px;border-bottom:1px solid var(--rule);align-items:start}
+.rrow:last-child{border-bottom:0}
+.rrow .yr{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.rrow .nm{font-family:var(--display);font-size:20px;line-height:1.15}
+.rrow .ds{color:var(--muted);font-size:14.5px}
+.rrow .cl{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.rrow .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;padding-top:4px;color:var(--muted)}
+.rrow button.ph{grid-column:2/-1;justify-self:start;font:500 10.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;background:transparent;border:1px solid var(--ink);color:var(--ink);padding:7px 9px;cursor:pointer}
+@media (max-width:560px){.rrow{grid-template-columns:48px minmax(0,1fr)}.rrow .tag{grid-column:2}}
+.more{display:flex;justify-content:center;padding:12px;border-top:1px solid var(--rule)}
+
+/* Steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:2px solid var(--ink);counter-reset:s}
+@media (max-width:860px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps li{padding:16px 16px 18px 0;counter-increment:s;display:flex;flex-direction:column;gap:6px;min-width:0}
+@media (max-width:860px){.steps li{flex-direction:row;gap:14px;border-bottom:1px solid var(--rule);padding:14px 0}}
+.steps li::before{content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:12px;color:var(--orange-ink);min-width:24px;padding-top:4px}
+.steps b{font-family:var(--display);font-weight:400;font-size:22px;display:block;line-height:1.1}
+.steps span{color:var(--muted);font-size:15px}
+
+/* Oil and gas */
+.ops{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.ops{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.ops{grid-template-columns:minmax(0,1fr)}}
+.op{background:var(--sheet);border:1px solid var(--rule);overflow:hidden;display:flex;flex-direction:column;padding:0;font:inherit;color:inherit;text-align:left;cursor:zoom-in}
+.op img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s}
+.op:hover img{transform:scale(1.04)}
+.op .t{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;border-top:3px solid var(--dc)}
+.op .t p{color:var(--muted);font-size:14.5px}
+.prods{display:flex;flex-wrap:wrap;gap:8px}
+.prod{font:500 11.5px/1 var(--mono);letter-spacing:.04em;border:1px solid var(--rule);padding:10px 12px;background:var(--sheet);display:inline-flex;gap:8px;align-items:center}
+.prod b{font-weight:500;color:var(--dc)}
+.svc{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+@media (max-width:860px){.svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.svc{grid-template-columns:minmax(0,1fr)}}
+.svc div{padding:16px 18px 18px 0;border-bottom:1px solid var(--rule)}
+.svc b{display:block;font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:4px}
+.svc p{color:var(--muted);font-size:14.5px}
+.vm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+@media (max-width:860px){.vm{grid-template-columns:minmax(0,1fr)}}
+.vm div{padding:18px 20px 18px 0;display:flex;flex-direction:column;gap:8px}
+.vm p{font-size:16.5px}
+.partners{display:flex;flex-wrap:wrap;gap:8px}
+.partners span{font-family:var(--display);font-size:20px;padding:10px 16px;border:1px solid var(--rule);background:var(--sheet)}
+
+/* Values, clients */
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:2px solid var(--ink)}
+@media (max-width:760px){.values{grid-template-columns:minmax(0,1fr)}}
+.values div{padding:18px 18px 18px 0;display:flex;flex-direction:column;gap:6px}
+.values strong{font-family:var(--display);font-weight:400;font-size:28px;color:var(--orange-ink)}
+.values p{color:var(--muted)}
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));border-top:2px solid var(--ink)}
+.clients div{padding:14px 14px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
+.clients strong{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.2}
+.clients small{color:var(--muted)}
+
+/* Coming soon */
+.soon{border:1px dashed var(--muted);padding:32px 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+@media (max-width:760px){.soon{grid-template-columns:minmax(0,1fr)}}
+.soon ul{margin:0;padding-left:18px;color:var(--muted)}
+
+/* Next company */
+.next{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;text-decoration:none;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding:22px 0;margin-bottom:56px}
+.next h3{font-size:clamp(28px,4vw,40px);transition:color .2s}
+.next:hover h3{color:var(--dc)}
+.next .arr{font-family:var(--display);font-size:40px;transition:transform .25s}
+.next:hover .arr{transform:translateX(6px)}
+
+/* Contact */
+.contact{background:var(--slab);color:var(--slab-ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:36px;padding:clamp(22px,4vw,44px);margin-block:48px 64px}
+@media (max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+.contact .mono{color:var(--slab-muted)}
+.contact h2 em,.cta-band h2 em{font-style:normal;color:var(--orange)}
+.contact p{color:var(--slab-muted)}
+.lines{display:grid;border-top:1px solid rgba(255,255,255,.18)}
+.line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.18);align-items:center}
+.line .who{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--slab-muted)}
+.line .val{font-family:var(--display);font-size:clamp(20px,3vw,28px);line-height:1.15;user-select:all;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.line button{grid-row:1/3;grid-column:2}
+.form{display:grid;gap:12px;background:var(--slab-2);padding:20px;min-width:0;align-content:start}
+.form label{display:grid;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--slab-muted)}
+.form input,.form select,.form textarea{font:inherit;font-size:16px;padding:10px 12px;border:1px solid #5a5a5e;background:var(--slab);color:var(--slab-ink);border-radius:0;width:100%}
+.form textarea{min-height:90px;resize:vertical}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.wa{display:inline-flex;align-items:center;gap:8px;background:var(--wa);color:#fff;text-decoration:none;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:13px 16px}
+.cbtn{background:transparent;color:var(--slab-ink);border:1px solid var(--slab-muted);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:10px 12px;cursor:pointer}
+.status{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--slab-muted);min-height:1.4em}
+.cta-band{background:var(--slab);color:var(--slab-ink);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px;padding:clamp(22px,4vw,36px);margin-block:8px 64px}
+.cta-band .b{color:var(--slab-ink)}.cta-band .b.solid{color:#fff}
+.cta-band p{color:var(--slab-muted);margin-top:6px}
+
+footer{border-top:1px solid var(--rule);background:var(--sheet);padding-block:22px 28px}
+footer .in{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:6px 16px}
+footer a{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--muted)}
+footer a:hover{color:var(--ink)}
+
+/* Lightbox */
+.lb{position:fixed;inset:0;z-index:50;background:rgba(14,14,16,.95);display:grid;grid-template-rows:auto minmax(0,1fr) auto;color:#f3f3f4;padding:calc(env(safe-area-inset-top,0px) + 10px) max(12px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(12px,env(safe-area-inset-left,0px))}
+.lb .bar{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.lb .bar .mono{color:#b4b4b8}
+.lb .stage{position:relative;display:grid;place-items:center;min-height:0;touch-action:pan-y}
+.lb .stage img{max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.lb .nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:1px solid rgba(255,255,255,.3);width:44px;height:44px;font-size:20px;cursor:pointer}
+.lb .prev{left:0}.lb .next{right:0}
+.lb .x{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:8px 12px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.lb .foot{display:flex;flex-direction:column;gap:8px;padding-top:10px}
+.lb .foot h3{font-size:24px;color:#fff}
+.lb .foot p{color:#c9c9cc;font-size:15px}
+.lb .thumbs{display:flex;gap:6px;overflow-x:auto}
+.lb .thumbs button{flex:none;width:64px;height:48px;padding:0;border:2px solid transparent;background:#000;cursor:pointer;opacity:.6}
+.lb .thumbs button[aria-current="true"]{border-color:var(--orange);opacity:1}
+.lb .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+</style>
+</head>
+<body>
+
+
+<header class="top gut">
+  <div class="in">
+    <a class="brand" href="#home" aria-label="Uriel home"><img class="lg-light" src="img/logo.png" alt="Uriel"><img class="lg-dark" src="img/logo-dark.png" alt="Uriel"></a>
+    <nav class="main" aria-label="Uriel companies">
+      <a href="#properties" data-nav="properties" class="p-c"><i class="dot"></i>Properties</a>
+      <a href="#construction" data-nav="construction" class="c-c"><i class="dot"></i>Construction</a>
+      <a href="#oilgas" data-nav="oilgas" class="g-c"><i class="dot"></i>Oil &amp; Gas</a>
+      <a href="#farms" data-nav="farms" class="f-c"><i class="dot"></i>Farms</a>
+      <a href="#ventures" data-nav="ventures" class="v-c"><i class="dot"></i>Ventures</a>
+      <a href="#contact" data-nav="contact" class="cta">Contact</a>
+    </nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"></div>
+
+<main>
+<!-- ================= HOME ================= -->
+<section class="view gut" data-view="home" aria-label="Uriel">
+  <div class="in">
+    <div class="hero">
+      <div class="stack" style="gap:20px">
+        <div class="mono">Uriel · Victoria Island, Lagos · Since 2008</div>
+        <h1>Homes, roads and <em>energy</em> for Nigeria.</h1>
+        <p class="lede">Uriel is a Lagos group of five companies. We build and sell homes, build roads, schools and hospitals, and trade crude oil and petroleum products, with farming and investment alongside.</p>
+        <div class="btns"><a class="b solid" href="#properties">See our homes</a><a class="b" href="#construction">See our projects</a></div>
+      </div>
+      <div class="board" aria-label="Uriel companies">
+        <div class="cap"><span class="mono">The Uriel group</span><span class="mono">5 companies</span></div>
+        <a class="drow p-c" href="#properties"><div class="txt"><span class="mono">Residential development</span><h3>Uriel Properties</h3><p>Homes and estates in Ikoyi, VI and Lekki.</p></div><div class="pic"><img src="img/precinct-a.jpg" alt=""></div></a>
+        <a class="drow c-c" href="#construction"><div class="txt"><span class="mono">Construction</span><h3>Uriel Construction</h3><p>Roads, schools and public works since 2009.</p></div><div class="pic"><img src="img/ibadan-1.jpg" alt=""></div></a>
+        <a class="drow g-c" href="#oilgas"><div class="txt"><span class="mono">Energy</span><h3>Uriel Oil and Gas</h3><p>Crude oil and petroleum product trading since 2008.</p></div><div class="pic"><img src="img/og-platforms.jpg" alt="" style="object-position:center 70%"></div></a>
+        <a class="drow f-c" href="#farms"><div class="txt"><span class="mono">Agriculture</span><h3>Uriel Farms</h3><p>Farming and fresh produce.</p></div><div class="pic" aria-hidden="true"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="72" cy="16" r="7"/><path d="M4 58c20-12 68-12 88 0M12 50c18-9 54-9 72 0M24 43c12-5 36-5 48 0"/><path d="M28 30v10M28 33l-4-3M28 36l4-3M48 26v12M48 29l-4-3M48 32l4-3"/></svg></div></a>
+        <a class="drow v-c" href="#ventures"><div class="txt"><span class="mono">Diversified</span><h3>Uriel Integrated Ventures</h3><p>The group's diversified business.</p></div><div class="pic" aria-hidden="true"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="48" cy="32" r="9"/><circle cx="18" cy="14" r="6"/><circle cx="78" cy="14" r="6"/><circle cx="18" cy="52" r="6"/><circle cx="78" cy="52" r="6"/><path d="M23 17l17 9M73 17l-17 9M23 49l17-9M73 49l-17-9"/></svg></div></a>
+      </div>
+    </div>
+    <div class="facts" data-facts="home"></div>
+  </div>
+
+  <div class="in sec">
+    <article class="flag" data-flag></article>
+  </div>
+
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>What we're building today</h2></div><p class="lead">Road and drainage works on Olowu Street, Bogije, Ibeju-Lekki. The photos step through the job on their own. Tap a stage to jump to it.</p></div>
+    <div data-live></div>
+    <div class="sites" data-sites></div>
+  </div>
+
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Recent work</div><h2>Built by Uriel</h2></div><p class="lead">A selection from across the group. Tap a project for its photos.</p></div>
+    <div class="grid" data-grid="home"></div>
+  </div>
+
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">How we work</div><h2>Our values</h2></div></div>
+    <div class="values">
+      <div><strong>Professionalism</strong><p>Trained managers, engineers and architects plan every job for schedule, budget, safety and public disruption.</p></div>
+      <div><strong>Integrity</strong><p>Every service we deliver meets the highest ethical and legal standards.</p></div>
+      <div><strong>Resourcefulness</strong><p>We match materials and methods to each job and keep looking for ways to add value.</p></div>
+    </div>
+  </div>
+  <div class="in"><div class="cta-band"><div><h2>Talk to <em>Uriel</em></h2><p>0911 122 2007 · info@urielngr.com</p></div><div class="btns"><a class="b solid" href="#contact">Contact us</a></div></div></div>
+</section>
+
+<!-- ================= PROPERTIES ================= -->
+<section class="view gut p-c" data-view="properties" aria-label="Uriel Properties" hidden>
+  <div class="in">
+    <div class="chead">
+      <div class="stack" style="gap:16px">
+        <div class="eyebrow mono"><i class="dot"></i>Uriel Properties · Residential development</div>
+        <h1>Homes in Ikoyi, VI and <em>Lekki</em>.</h1>
+        <p class="lede">We design, build and sell homes across Lagos's prime neighbourhoods, from terraces in Oniru to The Uriel Precinct, a 154-home gated estate on Lekki Foreshore.</p>
+        <div class="btns"><a class="b solid" href="#contact" data-topic="home">Register interest</a><a class="b" href="#properties" data-jump="prop-dev">Browse developments ↓</a></div>
+      </div>
+      <button class="art" type="button" data-open="virgo" style="padding:0;cursor:zoom-in"><img src="img/virgo-1.jpg" alt="Virgopoint Court, Shoreline Estate, Ikoyi, at night"><span class="cap">Virgopoint Court · Ikoyi · 2022</span></button>
+    </div>
+    <div class="facts" data-facts="properties"></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">What we offer</div><h2>Homes built to last</h2></div><p class="lead">Every Uriel home is built by our own construction company, so we control quality from foundation to handover.</p></div>
+    <ul class="ticks"><li>Gated estates</li><li>Apartment buildings</li><li>Terraces and maisonettes</li><li>Detached homes</li><li>Sold with title</li><li>Built by Uriel Construction</li></ul>
+  </div>
+  <div class="in sec"><article class="flag" data-flag></article></div>
+  <div class="in sec" id="prop-dev">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Developments</div><h2>Browse our homes</h2></div><div class="chips" data-chips="prop" role="group" aria-label="Filter developments"></div></div>
+    <div class="grid" data-grid="prop"></div>
+    <div class="sites" data-sites="nophoto" style="margin-top:22px"></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Track record</div><h2>Homes we've delivered</h2></div><p class="lead" data-homesum></p></div>
+    <div class="rlist" data-homes></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Buying from Uriel</div><h2>How buying works</h2></div><p class="lead">The price and payment plan are shared once you register interest.</p></div>
+    <ol class="steps">
+      <li><div><b>Register interest</b><span>Tell us which home you want, by WhatsApp or the form.</span></div></li>
+      <li><div><b>Inspect</b><span>Visit the site with our team and see the plans.</span></div></li>
+      <li><div><b>Offer</b><span>Receive the offer letter with the price and payment plan.</span></div></li>
+      <li><div><b>Pay</b><span>Pay outright or in stages while the home is built.</span></div></li>
+      <li><div><b>Handover</b><span>Collect your keys and your title documents.</span></div></li>
+    </ol>
+  </div>
+  <div class="in"><a class="next c-c" href="#construction"><div class="stack" style="gap:4px"><span class="mono">Next company</span><h3>Uriel Construction</h3></div><span class="arr">→</span></a></div>
+</section>
+
+<!-- ================= CONSTRUCTION ================= -->
+<section class="view gut c-c" data-view="construction" aria-label="Uriel Construction" hidden>
+  <div class="in">
+    <div class="chead">
+      <div class="stack" style="gap:16px">
+        <div class="eyebrow mono"><i class="dot"></i>Uriel Construction · Infrastructure</div>
+        <h1>Roads, schools and <em>public works</em>.</h1>
+        <p class="lede">A fully integrated construction company. Our project managers, engineers and architects have delivered roads, classroom blocks and hospital works for Lagos State, Oyo State and the Federal Government.</p>
+        <div class="btns"><a class="b solid" href="#contact" data-topic="build">Discuss a project</a><a class="b" href="#construction" data-jump="con-rec">See every project ↓</a></div>
+      </div>
+      <button class="art" type="button" data-open="ikotun" style="padding:0;cursor:zoom-in"><img src="img/ikotun-1.jpg" alt="18-classroom block at Government Technical College, Ikotun"><span class="cap">GTC Ikotun · 18-classroom block · 2020</span></button>
+    </div>
+    <div class="facts" data-facts="construction"></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">What we do</div><h2>Capabilities</h2></div><p class="lead">We take projects by hard bid, negotiated price, traditional contract, management contracting, construction management at risk, or design and build.</p></div>
+    <ul class="ticks"><li>Road construction</li><li>Civil and structural works</li><li>Building construction</li><li>Industrial construction</li><li>Schools and hospitals</li><li>Renovation and refurbishment</li><li>Project management</li><li>Facility management</li><li>Site survey: land, roads, buildings</li><li>Landscaping</li><li>Specialised construction</li><li>Support services</li></ul>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono kicker"><span class="pill build">On site now</span></div><h2>Olowu Street, Bogije</h2></div><p class="lead">Road and drainage works in Ibeju-Lekki, from the first community walk to the finished drains.</p></div>
+    <div data-live></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Projects with photos</div><h2>Featured projects</h2></div><div class="chips" data-chips="con" role="group" aria-label="Filter projects"></div></div>
+    <div class="grid" data-grid="con"></div>
+  </div>
+  <div class="in sec" id="con-rec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Full record, 2009 to 2023</div><h2>Every project</h2></div><p class="lead">Tap a year or a type to filter the list.</p></div>
+    <div class="rec"><div class="yrs" id="yrs"></div><div class="chips" id="recChips" role="group" aria-label="Filter by type"></div><div class="rlist" id="recList"></div></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Public sector</div><h2>Clients we've built for</h2></div></div>
+    <div class="clients" id="clients"></div>
+  </div>
+  <div class="in"><a class="next g-c" href="#oilgas"><div class="stack" style="gap:4px"><span class="mono">Next company</span><h3>Uriel Oil and Gas</h3></div><span class="arr">→</span></a></div>
+</section>
+
+<!-- ================= OIL AND GAS ================= -->
+<section class="view gut g-c" data-view="oilgas" aria-label="Uriel Oil and Gas" hidden>
+  <div class="in">
+    <div class="chead">
+      <div class="stack" style="gap:16px">
+        <div class="eyebrow mono"><i class="dot"></i>Uriel Oil and Gas · Energy</div>
+        <h1>Excellence in <em>energy</em>.</h1>
+        <p class="lede">A full-service oil trading company, incorporated in Nigeria in 2008. We trade, market and distribute crude oil and petroleum products, backed by marine logistics and terminal operations.</p>
+        <div class="btns"><a class="b solid" href="#contact" data-topic="gas">Talk to our energy team</a></div>
+      </div>
+      <button class="art" type="button" data-open="og" style="padding:0;cursor:zoom-in"><img src="img/og-rig.jpg" alt="Offshore platform"><span class="cap">Offshore operations</span></button>
+    </div>
+    <div class="facts" data-facts="oilgas"></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">The company</div><h2>Who we are</h2></div></div>
+    <div class="stack" style="gap:16px;max-width:780px;font-size:17px">
+      <p>We have exported crude oil and refined products from Nigerian refineries and from selected locations along the West African coast. Over the years our management has built relationships with some of the largest players in international oil, alongside a strong network of local contacts.</p>
+      <p>Marketing and distribution of oil products are a significant part of our business. We have registered offices in Lagos and Abuja, with our headquarters in Lagos.</p>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Our operations</div><h2>What we do</h2></div><p class="lead">Tap a photo to enlarge it.</p></div>
+    <div class="ops">
+      <button class="op" type="button" data-open="og" data-i="0"><img src="img/og-rig.jpg" alt="Offshore platform" loading="lazy"><span class="t"><h3>Crude oil trading</h3><p>Buying and selling crude oil with local and international partners.</p></span></button>
+      <button class="op" type="button" data-open="og" data-i="1"><img src="img/og-wellhead.jpg" alt="Wellhead" loading="lazy"><span class="t"><h3>Petroleum product supply</h3><p>Supply of refined products to distributors and industry.</p></span></button>
+      <button class="op" type="button" data-open="og" data-i="2"><img src="img/og-port.jpg" alt="Port with container ship" loading="lazy"><span class="t"><h3>Marine logistics</h3><p>Moving cargo by sea, from voyage declaration to delivery.</p></span></button>
+      <button class="op" type="button" data-open="og" data-i="3"><img src="img/og-platforms.jpg" alt="Offshore platforms at sunset" loading="lazy" style="object-position:center 70%"><span class="t"><h3>Terminal operations</h3><p>Storage, receipt, delivery and billing at the terminal.</p></span></button>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Products</div><h2>What we trade</h2></div></div>
+    <div class="prods" id="prods"></div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">At the terminal</div><h2>Terminal services</h2></div></div>
+    <div class="svc">
+      <div><b>Marine operations</b><p>For the vessel agent, from voyage declaration until vessel departure.</p></div>
+      <div><b>Vessel operations</b><p>Discharging, loading and shifting cargo at the quayside.</p></div>
+      <div><b>Cargo storage</b><p>Storage and shifting of cargo in the terminal, with shrinkage and tolerances accounted for.</p></div>
+      <div><b>Receipt and delivery</b><p>Bulking and break-bulking operations for cargo agents.</p></div>
+      <div><b>Gate operations</b><p>Entry and exit of trucks and trains at cargo receipt or delivery.</p></div>
+      <div><b>Billing</b><p>Invoicing before, after or periodically, by published tariff or special contract.</p></div>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Our philosophy</div><h2>Vision and mission</h2></div></div>
+    <div class="vm">
+      <div><span class="mono">Vision</span><p>To be the leading and most trusted energy partner locally and internationally, through market diversification and reliable supply.</p></div>
+      <div><span class="mono">Mission</span><p>To create an exceptional brand dedicated to premium-quality products and services, through reputable partnerships globally and best practice.</p></div>
+      <div><span class="mono">Strategy</span><p>To stand at the forefront of energy trading with highly experienced professionals and innovative methods, and to grow further in the international market.</p></div>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Partnerships</div><h2>Who we work with</h2></div></div>
+    <div class="partners"><span>Total</span><span>bp</span><span>Glencore</span><span>SOCAR</span><span>NNPC</span><span>NAPIMS</span><span>NipeX</span><span>Department of Petroleum Resources</span><span>Eterna</span></div>
+  </div>
+  <div class="in"><a class="next f-c" href="#farms"><div class="stack" style="gap:4px"><span class="mono">Next company</span><h3>Uriel Farms</h3></div><span class="arr">→</span></a></div>
+</section>
+
+<!-- ================= FARMS ================= -->
+<section class="view gut f-c" data-view="farms" aria-label="Uriel Farms" hidden>
+  <div class="in">
+    <div class="chead">
+      <div class="stack" style="gap:16px">
+        <div class="eyebrow mono"><i class="dot"></i>Uriel Farms · Agriculture</div>
+        <h1>Food grown on <em>Uriel land</em>.</h1>
+        <p class="lede">Uriel Farms is the group's agriculture business.</p>
+        <div class="btns"><a class="b solid" href="#contact" data-topic="farm">Ask about Uriel Farms</a></div>
+      </div>
+      <div class="art" aria-hidden="true"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="72" cy="16" r="7"/><path d="M4 58c20-12 68-12 88 0M12 50c18-9 54-9 72 0M24 43c12-5 36-5 48 0"/><path d="M28 30v10M28 33l-4-3M28 36l4-3M48 26v12M48 29l-4-3M48 32l4-3"/></svg></div>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="soon"><div class="stack" style="gap:8px"><span class="mono">Coming soon</span><h3>We're preparing this page</h3></div><ul><li>What we grow or raise</li><li>Where the farm is, and how big</li><li>Who we supply</li><li>How to buy or partner with us</li></ul></div>
+  </div>
+  <div class="in"><a class="next v-c" href="#ventures"><div class="stack" style="gap:4px"><span class="mono">Next company</span><h3>Uriel Integrated Ventures</h3></div><span class="arr">→</span></a></div>
+</section>
+
+<!-- ================= VENTURES ================= -->
+<section class="view gut v-c" data-view="ventures" aria-label="Uriel Integrated Ventures" hidden>
+  <div class="in">
+    <div class="chead">
+      <div class="stack" style="gap:16px">
+        <div class="eyebrow mono"><i class="dot"></i>Uriel Integrated Ventures · Diversified</div>
+        <h1>Uriel <em>Integrated Ventures</em>.</h1>
+        <p class="lede">The group's diversified business.</p>
+        <div class="btns"><a class="b solid" href="#contact" data-topic="vent">Ask about Integrated Ventures</a></div>
+      </div>
+      <div class="art" aria-hidden="true"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="48" cy="32" r="9"/><circle cx="18" cy="14" r="6"/><circle cx="78" cy="14" r="6"/><circle cx="18" cy="52" r="6"/><circle cx="78" cy="52" r="6"/><path d="M23 17l17 9M73 17l-17 9M23 49l17-9M73 49l-17-9"/></svg></div>
+    </div>
+  </div>
+  <div class="in sec">
+    <div class="soon"><div class="stack" style="gap:8px"><span class="mono">Coming soon</span><h3>We're preparing this page</h3></div><ul><li>What the business does</li><li>Who it works with</li><li>Notable deals and partners</li></ul></div>
+  </div>
+  <div class="in"><a class="next p-c" href="#properties"><div class="stack" style="gap:4px"><span class="mono">Back to the start</span><h3>Uriel Properties</h3></div><span class="arr">→</span></a></div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="view gut" data-view="contact" aria-label="Contact Uriel" hidden>
+  <div class="in">
+    <div class="contact">
+      <div class="stack" style="gap:18px">
+        <div class="mono">Head office</div>
+        <h2>Talk to <em>Uriel</em></h2>
+        <p>19 Bishop Kale Close, Victoria Island, Lagos. Offices in Lagos and Abuja.</p>
+        <div class="lines">
+          <div class="line"><span class="who">Phone · WhatsApp</span><span class="val" id="v1">0911 122 2007</span><button class="cbtn" type="button" data-copy="09111222007" data-for="v1">Copy</button></div>
+          <div class="line"><span class="who">Phone</span><span class="val" id="v2">0911 133 3007</span><button class="cbtn" type="button" data-copy="09111333007" data-for="v2">Copy</button></div>
+          <div class="line"><span class="who">General</span><span class="val" id="v3">info@urielngr.com</span><button class="cbtn" type="button" data-copy="info@urielngr.com" data-for="v3">Copy</button></div>
+          <div class="line"><span class="who">Enquiries</span><span class="val" id="v4">enquiries@urielngr.com</span><button class="cbtn" type="button" data-copy="enquiries@urielngr.com" data-for="v4">Copy</button></div>
+        </div>
+        <div class="status" id="copyStatus" aria-live="polite"></div>
+      </div>
+      <form class="form" id="enq" novalidate>
+        <div class="mono">Send us a message on WhatsApp</div>
+        <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" placeholder="e.g. Adaeze Okafor"></label>
+        <label for="f-topic">I'm interested in
+          <select id="f-topic" name="topic">
+            <option value="precinct">A home at The Uriel Precinct</option>
+            <option value="home">Another Uriel Properties development</option>
+            <option value="build">A construction project</option>
+            <option value="gas">Oil and gas supply or trading</option>
+            <option value="farm">Uriel Farms</option>
+            <option value="vent">Uriel Integrated Ventures</option>
+            <option value="other">Something else</option>
+          </select>
+        </label>
+        <label for="f-msg">Message<textarea id="f-msg" name="msg" placeholder="Tell us what you need"></textarea></label>
+        <div class="acts"><a class="wa" id="waLink" href="https://wa.me/2349111222007" target="_blank" rel="noopener">Open in WhatsApp ↗</a><button class="cbtn" id="copyMsg" type="button">Copy message</button></div>
+        <div class="status" id="msgStatus" aria-live="polite">Goes to 0911 122 2007. If WhatsApp doesn't open, copy the message and send it there.</div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="gut">
+  <div class="in">
+    <nav aria-label="Footer"><a href="#properties">Uriel Properties</a><a href="#construction">Uriel Construction</a><a href="#oilgas">Uriel Oil and Gas</a><a href="#farms">Uriel Farms</a><a href="#ventures">Uriel Integrated Ventures</a><a href="#contact">Contact</a></nav>
+    <span class="mono">© 2026 Uriel · www.urielngr.com</span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="bar"><span class="mono" id="lbCount"></span><button class="x" id="lbClose" type="button">Close ✕</button></div>
+  <div class="stage" id="lbStage"><img id="lbImg" alt=""><button class="nav prev" id="lbPrev" type="button" aria-label="Previous photo">←</button><button class="nav next" id="lbNext" type="button" aria-label="Next photo">→</button></div>
+  <div class="foot"><h3 id="lbTitle"></h3><p id="lbDesc"></p><div class="thumbs" id="lbThumbs"></div></div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const imgs=(k,n)=>Array.from({length:n},(_,i)=>`img/${k}-${i+1}.jpg`);
+
+/* ---------- Projects ---------- */
+const P=[
+ {id:'precinct',biz:'p',st:'live',name:'The Uriel Precinct',loc:'Ostia Island, Lekki Foreshore',yr:'Selling now',d:'154 detached five-bedroom homes, each on a 500 m² plot with a private pool and C of O.',photos:['img/precinct-a.jpg','img/precinct-b.jpg','img/precinct-c.jpg']},
+ {id:'bourd',biz:'p',st:'build',name:'22 Bourdillon',loc:'Bourdillon, Ikoyi',yr:'Under construction',d:'Multi-storey apartment building. Structure is up; cladding, glazing and balconies are going in.',photos:['img/bourd-site-1.jpg','img/bourd-site-2.jpg',...imgs('bourd',2)]},
+ {id:'banana',biz:'p',st:'build',name:'Banana Island',loc:'Banana Island, Ikoyi',yr:'Under construction',d:'Semi-detached homes. The four-storey blocks are up with windows in.',photos:imgs('banana',3)},
+ {id:'bedwell',biz:'p',st:'build',name:'Bedwell',loc:'Bedwell, Ikoyi',yr:'Under construction',d:'Mixed residential.',photos:[]},
+ {id:'alexander',biz:'p',st:'build',name:'Alexander Avenue',loc:'Alexander Avenue, Ikoyi',yr:'Under construction',d:'Apartment block.',photos:[]},
+ {id:'orange',biz:'p',st:'build',name:'Orange Island',loc:'Orange Island, Lekki',yr:'Under construction',d:'Large-scale residential.',photos:[]},
+ {id:'periwinkle',biz:'p',st:'build',name:'Periwinkle',loc:'Behind Holy Trinity Catholic Church',yr:'Under construction',d:'Detached houses.',photos:[]},
+ {id:'stonebridge',biz:'p',st:'build',name:'Stonebridge Street',loc:'Lekki Phase 1',yr:'Under construction',d:'Mixed residential.',photos:[]},
+ {id:'height',biz:'p',st:'design',name:'Uriel Height',loc:'Ikoyi',yr:'In design',d:'A curved-balcony apartment tower.',photos:imgs('height',3)},
+ {id:'gra',biz:'p',st:'design',name:'New GRA estate',loc:'New GRA',yr:'In design',d:'A 342-plot estate of terraced homes.',photos:imgs('gra',2)},
+ {id:'ogalade',biz:'p',st:'design',name:'Ogalade apartments',loc:'Ogalade',yr:'In design',d:'A block of three-bedroom apartments.',photos:imgs('ogalade',2)},
+ {id:'comm',biz:'p',st:'design',name:'Commercial complex',loc:'Lagos',yr:'In design',d:'Curved commercial building with landscaped grounds, sports court and play area.',photos:imgs('comm',4)},
+ {id:'dyo',biz:'p',st:'done',name:'Dyo Korones Court',loc:'Victoria Island',yr:'2023',d:'8 three-bedroom and 2 two-bedroom flats.',photos:imgs('dyo',4)},
+ {id:'virgo',biz:'p',st:'done',name:'Virgopoint Court',loc:'Shoreline Estate, Ikoyi',yr:'2022',d:'4 three-bedroom flats and 2 four-bedroom maisonettes.',photos:imgs('virgo',5)},
+ {id:'vienna',biz:'p',st:'done',name:'Vienna Manilla Court',loc:'Lekki Phase 1',yr:'2022',d:'8 three-bedroom flats and 2 four-bedroom maisonettes.',photos:imgs('vienna',2)},
+ {id:'bogije',biz:'c',cat:'road',st:'build',name:'Olowu Street road and drainage',loc:'Bogije, Ibeju-Lekki',yr:'Ongoing',d:'Reinforced-concrete side drains with covers, excavation and road works.',photos:imgs('bogije',7)},
+ {id:'agege',biz:'c',cat:'road',st:'build',name:'Road construction, Agege',loc:'Agege, Lagos',yr:'Under construction',d:'Side drains, grading, compaction and asphalt surfacing.',photos:imgs('agege',5)},
+ {id:'ibadan',biz:'c',cat:'road',st:'done',name:'Road construction, Ibadan',loc:'Ibadan, Oyo State',yr:'Oyo State',d:'Asphalt dual carriageway with paved median, street lights and concrete drainage.',photos:imgs('ibadan',3)},
+ {id:'ikotun',biz:'c',cat:'school',st:'done',name:'18-classroom block, GTC Ikotun',loc:'Ikotun, Lagos',yr:'2020',d:'New classroom block for Government Technical College. Client: LASTVEB.',photos:imgs('ikotun',7)},
+ {id:'badagry',biz:'c',cat:'health',st:'done',name:'Ambulance bay, Badagry General Hospital',loc:'Badagry, Lagos',yr:'2022',d:'Construction and completion of the ambulance bay. Client: LASIAMA.',photos:imgs('badagry',5)},
+ {id:'alausa',biz:'c',cat:'civic',st:'done',name:'Works building renovation',loc:'Alausa, Ikeja',yr:'Lagos State',d:'Renovation of the multi-storey Works building at the Secretariat.',photos:imgs('alausa',5)},
+ {id:'og',biz:'g',st:'done',name:'Uriel Oil and Gas',loc:'Lagos and Abuja',yr:'Since 2008',d:'Crude oil trading, petroleum product supply, marine logistics and terminal operations.',photos:['img/og-rig.jpg','img/og-wellhead.jpg','img/og-port.jpg','img/og-platforms.jpg']}
+];
+const PI=Object.fromEntries(P.map(p=>[p.id,p]));
+const STL={live:'Selling now',build:'Under construction',design:'In design',done:'Completed'};
+
+/* ---------- Record ---------- */
+const FMH='Federal Ministry of Lands, Housing & Urban Development',OYO='Oyo State Ministry of Works & Transport',LASIAMA='Lagos State Infrastructure Asset Management Agency (LASIAMA)',LASTVEB='Lagos State Technical and Vocational Education Board (LASTVEB)',LMH='Lagos State Ministry of Housing';
+const R=[
+ [2009,'Twinny Court','11 four-bedroom terrace houses','Osapa, Lekki','','home'],
+ [2010,'Ayedun Olorunsogo and Badore community upgrade','Roads, drainage and power supply','Ajah, Lagos',FMH,'road'],
+ [2010,'Alake of Egbaland Palace','Remodelling of the palace','Abeokuta, Ogun State',FMH,'civic'],
+ [2011,'Oke Ola – Aborerin – Eruwa/Igboora Junction Road','Rehabilitation of 4.0 km of road','Oyo State',OYO,'road'],
+ [2012,'Elewuro – Apatuku – Olodo Road','Rehabilitation of 1.5 km of road','Ibadan, Oyo State',OYO,'road'],
+ [2013,'Vive Court','4 five-bedroom terrace houses','Banana Island, Ikoyi','','home'],
+ [2014,'Rash Court','6 four-bedroom terrace houses','Oniru Estate, Victoria Island','','home'],
+ [2015,'Jummy Court','6 five-bedroom detached houses','Parkview Estate, Ikoyi','','home'],
+ [2015,'Vitro Court','4 five-bedroom detached houses','Lekki Phase 1','','home'],
+ [2015,'Tomilayo Apartments','6 three-bedroom apartments','Osapa, Lekki','','home'],
+ [2016,'Detached houses, Lekki Phase 1','2 five-bedroom detached houses','Lekki Phase 1','','home'],
+ [2016,'Zeelah Mews','5 four-bedroom terrace houses','Oniru Estate, Victoria Island','','home'],
+ [2016,'Tori Court','5 four-bedroom terrace houses','Parkview Estate, Ikoyi','','home'],
+ [2016,'Angela Court','5 four-bedroom terrace houses','Lekki Phase 1','','home'],
+ [2016,'Ant and Drew Apartments','3 three-bedroom apartments','Osapa, Lekki','','home'],
+ [2016,'Fidelia Apartments','6 three-bedroom and 4 two-bedroom apartments','Oniru Estate, Victoria Island','','home'],
+ [2016,'Amani Apartments','4 three-bedroom and 2 two-bedroom apartments','Parkview Estate, Ikoyi','','home'],
+ [2016,'Demville Court','6 four-bedroom terrace houses','Oniru Estate, Victoria Island','','home'],
+ [2017,'Asadas Court','8 five-bedroom terrace houses','Oniru Estate, Victoria Island','','home'],
+ [2018,'Cypress Court','14 three-bedroom apartments','Oniru Estate, Victoria Island','','home'],
+ [2018,'Mosunmola Court','10 four-bedroom terrace houses and 3 four-bedroom apartments','Oniru Estate, Victoria Island','','home'],
+ [2018,'Crescent-Cross Court','7 five-bedroom detached houses','Lekki Phase 1','','home'],
+ [2019,'Apartments and maisonettes, Lekki Phase 1','8 three-bedroom apartments and 4 two-bedroom maisonettes','Lekki Phase 1','','home'],
+ [2019,'Office complex, Victoria Island','Multi-level, multipurpose office complex','Victoria Island','','comm'],
+ [2019,'JOK office and shopping complex','Multi-level office and shopping complex','Lekki Phase 1','','comm'],
+ [2020,'Detached houses, Lekki Right','4 five-bedroom detached houses','Lekki Right','','home'],
+ [2020,'IDH / Mainland Hospital','Remodelling of the Infectious Diseases Hospital','Yaba, Lagos',LASIAMA,'health'],
+ [2020,'Ikeja Junior High School','Renovation','Ikeja, Lagos',LASIAMA,'school'],
+ [2020,'Bridgeview','Multi-level banking hall and office complex','Lekki Phase 1','','comm'],
+ [2020,'Government Technical College, Ikotun','New 18-classroom block','Ikotun, Lagos',LASTVEB,'school','ikotun'],
+ [2020,'Office complexes, Lekki Right','2 blocks of multi-level, multipurpose offices','Lekki Right','','comm'],
+ [2021,'Egan Igando Housing Scheme','Completion of 8 blocks','Igando, Lagos',LMH,'home'],
+ [2021,'Station Grammar School','Renovation','Iju, Lagos',LASIAMA,'school'],
+ [2021,'Isolo General Hospital','Construction of an oxygen triage','Isolo, Lagos',LASIAMA,'health'],
+ [2022,'Badagry General Hospital','Construction of the ambulance bay','Badagry, Lagos',LASIAMA,'health','badagry'],
+ [2022,'Virgopoint Court','4 three-bedroom flats and 2 maisonettes','Shoreline Estate, Ikoyi','','home','virgo'],
+ [2022,'Vienna Manilla Court','8 three-bedroom flats and 2 maisonettes','Lekki Phase 1','','home','vienna'],
+ [2023,'Government Technical College, Adosoba','Renovation of 2 18-classroom blocks','Adosoba, Lagos',LASTVEB,'school'],
+ [2023,'Egbe Junior High School','Renovation','Ikotun-Egbe, Lagos',LASIAMA,'school'],
+ [2023,'Ikotun Community Senior School','Renovation','Ikotun, Lagos',LASIAMA,'school'],
+ [2023,'Otta-Ikosi Junior and Senior Grammar School','Renovation','Otta-Ikosi, Lagos',LASIAMA,'school'],
+ [2023,'Government Technical College, Epe','Renovation of 18-classroom blocks','Epe, Lagos',LASTVEB,'school'],
+ [2023,'Dyo Korones Court','8 three-bedroom and 2 two-bedroom flats','Victoria Island','','home','dyo']
+].map(([y,n,d,l,c,cat,ph])=>({y,n,d,l,c,cat,ph}));
+const CAT={home:'Homes',road:'Roads',school:'Schools',health:'Healthcare',comm:'Commercial',civic:'Public buildings'};
+const HOMES=R.filter(r=>r.cat==='home'&&!r.c);
+const units=HOMES.reduce((s,r)=>s+(r.d.match(/\d+/g)||[]).filter(x=>+x<30).reduce((a,b)=>a+ +b,0),0);
+const pub=R.filter(r=>r.c).length;
+
+/* ---------- Facts strips ---------- */
+const FACTS={
+ home:[[5,'','companies in the group'],[R.length,'','projects delivered, 2009 to 2023'],[units,'+','homes built in Ikoyi, VI and Lekki'],[9,'','petroleum products traded']],
+ properties:[[154,'','homes at The Uriel Precinct'],[HOMES.length,'','developments delivered since 2009'],[units,'+','homes built'],[P.filter(p=>p.biz==='p'&&p.st==='build').length,'','sites under construction']],
+ construction:[[R.length,'','projects, 2009 to 2023'],[pub,'','for public agencies'],[5.5,' km','of road rehabilitated in Oyo State'],[R.filter(r=>r.cat==='school').length,'','school projects']],
+ oilgas:[[2008,'','year incorporated'],[2,'','offices: Lagos and Abuja'],[9,'','products traded'],[4,'','lines of operation']]
+};
+$$('[data-facts]').forEach(el=>{el.innerHTML=FACTS[el.dataset.facts].map(([n,suf,l])=>`<div><strong data-count="${n}" data-suf="${esc(suf)}">${n}${esc(suf)}</strong><small>${esc(l)}</small></div>`).join('');});
+function countUp(el){const end=+el.dataset.count,suf=el.dataset.suf||'',dec=String(end).includes('.')?1:0;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||end===2008){el.textContent=end+suf;return;}
+  const t0=performance.now(),D=900;function f(t){const k=Math.min(1,(t-t0)/D),v=end*(1-Math.pow(1-k,3));el.textContent=v.toFixed(dec)+suf;if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+function runCounts(view){view.querySelectorAll('[data-count]').forEach(countUp);}
+
+/* ---------- Flagship (home + properties) ---------- */
+$$('[data-flag]').forEach(el=>el.innerHTML=`
+  <div class="txt"><div class="mono">Flagship · Uriel Properties · Now registering interest</div><h2>The Uriel <em>Precinct</em></h2>
+  <p>154 detached five-bedroom homes on Ostia Island, off Freedom Way, Lekki Foreshore. Every home has its own 500 m² plot, a private pool and a Certificate of Occupancy.</p>
+  <div class="ff"><div><strong>154</strong><small>detached homes</small></div><div><strong>500 m²</strong><small>plot each</small></div><div><strong>5 + 2</strong><small>bedrooms + BQ</small></div></div>
+  <div class="btns"><a class="b solid" href="https://urielprecinct.pages.dev" target="_blank" rel="noopener">Explore the estate ↗</a><a class="b" href="#contact" data-topic="precinct">Register interest</a></div></div>
+  <div class="types">${[['A',48,'235'],['B',54,'218.6'],['C',52,'207.1']].map(([t,n,a],i)=>`<button type="button" data-open="precinct" data-i="${i}"><img src="img/precinct-${t.toLowerCase()}.jpg" alt="Typology ${t} render" loading="lazy"><span class="t"><b>Typology ${t}</b><small>${n} homes · ${a} m²</small></span></button>`).join('')}</div>`);
+
+/* ---------- Cards and grids ---------- */
+function card(p){return `<button class="pc" type="button" data-open="${p.id}">
+  <div class="ph"><img src="${p.photos[0]}" alt="${esc(p.name)}" loading="lazy"><span class="cnt">${p.photos.length} photo${p.photos.length>1?'s':''}</span></div>
+  <div class="bd"><div class="tl"><span class="mono">${esc(p.loc)}</span><span class="pill ${p.st}">${STL[p.st]}</span></div><h3>${esc(p.name)}</h3><p>${esc(p.d)}</p>
+  <div class="meta"><span class="mono">${esc(p.yr)}</span><span class="mono go">View photos →</span></div></div></button>`;}
+$('[data-grid="home"]').innerHTML=['bourd','banana','dyo','ikotun','virgo','badagry'].map(id=>card(PI[id])).join('');
+function chipBar(el,opts,init,on){el.innerHTML=opts.map(([v,l,n])=>`<button class="chip" type="button" data-v="${v}" aria-pressed="${v===init}">${l}${n!=null?` <span class="n">${n}</span>`:''}</button>`).join('');
+  el.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;el.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',c===b));on(b.dataset.v);});}
+const PROPS=P.filter(p=>p.biz==='p'&&p.photos.length);
+const drawProps=f=>{$('[data-grid="prop"]').innerHTML=PROPS.filter(p=>f==='all'||p.st===f).map(card).join('')||'<p class="empty-note">No developments in this group yet.</p>';};
+const pc=s=>PROPS.filter(p=>p.st===s).length;
+chipBar($('[data-chips="prop"]'),[['all','All',PROPS.length],['live','Selling',pc('live')],['build','Building',pc('build')],['design','In design',pc('design')],['done','Completed',pc('done')]],'all',drawProps);drawProps('all');
+const CONS=P.filter(p=>p.biz==='c'&&p.id!=='bogije');
+const drawCons=f=>{$('[data-grid="con"]').innerHTML=CONS.filter(p=>f==='all'||p.cat===f).map(card).join('');};
+chipBar($('[data-chips="con"]'),[['all','All',CONS.length],['road','Roads'],['school','Schools'],['health','Healthcare'],['civic','Public buildings']],'all',drawCons);drawCons('all');
+
+/* ---------- Site lists ---------- */
+const CRANE='<svg viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M30 86V10M30 10h80M30 10l-14 12M30 10l16 12M100 10v24M95 34h10v8H95zM12 86h104"/></svg>';
+const siteRow=p=>p.photos.length?`<button class="site" type="button" data-open="${p.id}"><span class="th"><img src="${p.photos[0]}" alt="" loading="lazy"></span><span><strong>${esc(p.name)}</strong><small>${esc(p.loc)} · ${p.photos.length} photos</small></span></button>`
+  :`<div class="site"><span class="th">${CRANE}</span><span><strong>${esc(p.name)}</strong><small>${esc(p.loc)} · ${esc(p.d)} Photos coming.</small></span></div>`;
+$('[data-sites]:not([data-sites="nophoto"])').innerHTML=P.filter(p=>p.st==='build'&&p.id!=='bogije').map(siteRow).join('');
+$('[data-sites="nophoto"]').innerHTML=P.filter(p=>p.biz==='p'&&p.st==='build'&&!p.photos.length).map(siteRow).join('');
+
+/* ---------- Homes list ---------- */
+function row(r){return `<div class="rrow"><span class="yr">${r.y}</span><div><div class="nm">${esc(r.n)}</div><div class="ds">${esc(r.d)} · ${esc(r.l)}</div>${r.c?`<div class="cl">Client: ${esc(r.c)}</div>`:''}</div><span class="tag">${CAT[r.cat]}</span>${r.ph?`<button class="ph" type="button" data-open="${r.ph}">View photos (${PI[r.ph].photos.length})</button>`:''}</div>`;}
+const homesRev=HOMES.slice().reverse();let homesAll=false;
+$('[data-homesum]').textContent=`${HOMES.length} developments and ${units}+ homes in Ikoyi, Victoria Island and Lekki since 2009.`;
+function drawHomes(){const L=homesAll?homesRev:homesRev.slice(0,6);$('[data-homes]').innerHTML=L.map(row).join('')+`<div class="more"><button class="b" type="button" id="homesMore">${homesAll?'Show fewer':'Show all '+HOMES.length}</button></div>`;$('#homesMore').onclick=()=>{homesAll=!homesAll;drawHomes();};}
+drawHomes();
+
+/* ---------- Record chart ---------- */
+let fy=null,fc='all',recAll=false;const YEARS=[];for(let y=2009;y<=2023;y++)YEARS.push(y);
+function drawYears(){const W=720,H=170,pad=22,bw=(W-pad*2)/YEARS.length,max=Math.max(...YEARS.map(y=>R.filter(r=>r.y===y).length)),sc=v=>v/max*(H-50);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Projects per year, 2009 to 2023">`;
+  for(let g=0;g<=max;g+=4){const yy=H-24-sc(g);s+=`<line x1="${pad}" x2="${W-pad}" y1="${yy}" y2="${yy}" stroke="var(--rule)"/><text x="0" y="${yy+3}">${g}</text>`;}
+  YEARS.forEach((y,i)=>{const rs=R.filter(r=>r.y===y),h=rs.filter(r=>r.cat==='home').length,o=rs.length-h,x=pad+i*bw+4,w=bw-8,on=fy===y;
+    s+=`<g class="bar${on?' sel':''}" data-y="${y}" tabindex="0" role="button" aria-label="${y}: ${rs.length} projects" style="opacity:${fy!=null&&!on?.35:1}"><rect x="${pad+i*bw}" y="0" width="${bw}" height="${H}" fill="transparent"/><rect x="${x}" y="${H-24-sc(h)}" width="${w}" height="${sc(h)}" fill="var(--c-prop)"/><rect x="${x}" y="${H-24-sc(h)-sc(o)}" width="${w}" height="${sc(o)}" fill="var(--c-con)"/>${rs.length?`<text x="${x+w/2}" y="${H-28-sc(rs.length)}" text-anchor="middle">${rs.length}</text>`:''}<text x="${x+w/2}" y="${H-8}" text-anchor="middle">${i%2===0||on?y:'’'+String(y).slice(2)}</text></g>`;});
+  s+=`</svg><div class="legend mono"><span><i style="background:var(--c-prop)"></i>Homes</span><span><i style="background:var(--c-con)"></i>Roads, schools, hospitals and other works</span>${fy?`<button class="chip" type="button" id="clearYr">${fy} ✕ Clear year</button>`:''}</div>`;
+  $('#yrs').innerHTML=s;const c=$('#clearYr');if(c)c.onclick=()=>{fy=null;drawRec();};}
+$('#yrs').addEventListener('click',e=>{const g=e.target.closest('.bar');if(!g)return;const y=+g.dataset.y;fy=fy===y?null:y;recAll=false;drawRec();});
+$('#yrs').addEventListener('keydown',e=>{const g=e.target.closest('.bar');if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();g.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+function drawRec(){drawYears();const L=R.filter(r=>(fy==null||r.y===fy)&&(fc==='all'||r.cat===fc)).slice().reverse(),show=recAll||L.length<=8?L:L.slice(0,8);
+  $('#recList').innerHTML=(show.map(row).join('')||'<div class="rrow"><span></span><div class="ds">No projects match this filter.</div></div>')+(L.length>8?`<div class="more"><button class="b" type="button" id="recMore">${recAll?'Show fewer':'Show all '+L.length}</button></div>`:'');
+  const m=$('#recMore');if(m)m.onclick=()=>{recAll=!recAll;drawRec();};}
+chipBar($('#recChips'),[['all','All types',R.length],...Object.entries(CAT).map(([k,l])=>[k,l,R.filter(r=>r.cat===k).length])],'all',v=>{fc=v;recAll=false;drawRec();});
+drawRec();
+const CL={};R.filter(r=>r.c).forEach(r=>{(CL[r.c]=CL[r.c]||[]).push(r.y)});
+$('#clients').innerHTML=Object.entries(CL).sort((a,b)=>b[1].length-a[1].length).map(([c,ys])=>`<div><strong>${esc(c)}</strong><small>${ys.length} project${ys.length>1?'s':''} · ${Math.min(...ys)}${Math.max(...ys)!==Math.min(...ys)?'–'+Math.max(...ys):''}</small></div>`).join('');
+
+/* ---------- Oil and gas products ---------- */
+$('#prods').innerHTML=[['Crude oil',''],['Naphtha',''],['Premium motor spirit','PMS'],['Dual purpose kerosene','DPK'],['Aviation turbine kerosene','ATK'],['Gasoil','AGO'],['Fuel oil',''],['Liquefied natural gas','LNG'],['Liquefied petroleum gas','LPG']].map(([n,a])=>`<span class="prod">${a?`<b>${a}</b>`:''}${n}</span>`).join('');
+
+/* ---------- Live stepper (one per page that has [data-live]) ---------- */
+const STAGES=[['Community walk','The team walks the route with residents and community leaders.'],['Plan review','Engineers check the drawings against the street.'],['Excavation','Excavators open the trench for the new side drain.'],['Reinforcement','Steel is laid in the drain base.'],['Formwork','Timber forms go up for the drain walls.'],['Concrete pour','Concrete is poured into the reinforced forms.'],['Drain covers','The finished drain is closed with precast slabs.']];
+const LN=STAGES.length,lives=[];
+$$('[data-live]').forEach((el,n)=>{
+  el.className='live';
+  el.innerHTML=`<div class="stage"><span class="ct"></span>${PI.bogije.photos.map((s,i)=>`<img src="${s}" alt="Olowu Street, stage ${i+1}: ${STAGES[i][0]}" data-i="${i}" loading="lazy">`).join('')}<span class="prog"><i></i></span></div>
+  <div class="side"><div class="stack" style="gap:4px"><span class="mono">Uriel Construction · Bogije, Ibeju-Lekki</span><h3>Olowu Street road and drainage</h3></div>
+  <ol class="track">${STAGES.map(([t,d],i)=>`<li><button type="button" data-i="${i}"><b>${String(i+1).padStart(2,'0')}</b><span><strong>${t}</strong>${d}</span></button></li>`).join('')}</ol>
+  <div class="scrub"><button class="b" type="button" data-step="-1" aria-label="Previous stage">←</button><input type="range" min="0" max="${LN-1}" value="0" aria-label="Construction stage"><button class="b" type="button" data-step="1" aria-label="Next stage">→</button></div></div>`;
+  const L={el,si:0,auto:null};
+  L.go=i=>{L.si=(i+LN)%LN;el.querySelector('input').value=L.si;el.querySelector('.ct').textContent=`Stage ${L.si+1} of ${LN} · ${STAGES[L.si][0]}`;el.querySelector('.prog i').style.width=((L.si+1)/LN*100)+'%';
+    el.querySelectorAll('.stage img').forEach(im=>{const on=+im.dataset.i===L.si;im.classList.toggle('on',on);if(on)im.loading='eager';});
+    el.querySelectorAll('.track button').forEach(b=>{const k=+b.dataset.i;b.classList.toggle('past',k<L.si);if(k===L.si)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});};
+  el.querySelector('.track').addEventListener('click',e=>{const b=e.target.closest('button');if(b)L.go(+b.dataset.i);});
+  el.querySelector('input').addEventListener('input',e=>L.go(+e.target.value));
+  el.querySelectorAll('[data-step]').forEach(b=>b.onclick=()=>L.go(L.si+ +b.dataset.step));
+  el.querySelector('.stage').addEventListener('click',()=>openLB('bogije',L.si));
+  ['pointerdown','keydown','input'].forEach(ev=>el.addEventListener(ev,()=>{clearInterval(L.auto);L.auto='stopped';}));
+  L.go(0);lives.push(L);
+});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function startLives(view){lives.forEach(L=>{if(L.auto==='stopped')return;clearInterval(L.auto);L.auto=null;if(!reduce&&view.contains(L.el))L.auto=setInterval(()=>L.go(L.si+1),3400);});}
+
+/* ---------- Lightbox ---------- */
+let cur=null,ci=0,lastFocus=null;
+function openLB(id,i=0){cur=PI[id];ci=i;lastFocus=document.activeElement;$('#lbTitle').textContent=cur.name;$('#lbDesc').textContent=`${cur.loc} · ${cur.yr}. ${cur.d}`;
+  $('#lbThumbs').innerHTML=cur.photos.map((s,k)=>`<button type="button" data-k="${k}" aria-label="Photo ${k+1}"><img src="${s}" alt=""></button>`).join('');
+  $('#lb').hidden=false;document.body.style.overflow='hidden';showLB();$('#lbClose').focus();}
+function showLB(){const n=cur.photos.length;ci=(ci+n)%n;$('#lbImg').src=cur.photos[ci];$('#lbImg').alt=`${cur.name}, photo ${ci+1} of ${n}`;$('#lbCount').textContent=`${ci+1} / ${n}`;$('#lbPrev').hidden=$('#lbNext').hidden=n<2;
+  $$('#lbThumbs button').forEach(b=>b.setAttribute('aria-current',+b.dataset.k===ci));}
+function closeLB(){$('#lb').hidden=true;document.body.style.overflow='';if(lastFocus)lastFocus.focus();}
+document.addEventListener('click',e=>{const o=e.target.closest('[data-open]');if(o)openLB(o.dataset.open,+(o.dataset.i||0));});
+$('#lbClose').onclick=closeLB;$('#lbPrev').onclick=()=>{ci--;showLB();};$('#lbNext').onclick=()=>{ci++;showLB();};
+$('#lbThumbs').addEventListener('click',e=>{const b=e.target.closest('button');if(b){ci=+b.dataset.k;showLB();}});
+$('#lb').addEventListener('click',e=>{if(e.target.id==='lbStage')closeLB();});
+document.addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft'){ci--;showLB();}if(e.key==='ArrowRight'){ci++;showLB();}});
+let sx=null;$('#lbStage').addEventListener('pointerdown',e=>{sx=e.clientX;});$('#lbStage').addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){ci+=dx<0?1:-1;showLB();}});
+
+/* ---------- Routing ---------- */
+const VIEWS=['home','properties','construction','oilgas','farms','ventures','contact'];
+const DC={home:'--orange',properties:'--c-prop',construction:'--c-con',oilgas:'--c-gas',farms:'--c-farm',ventures:'--c-vent',contact:'--orange'};
+let jumpTo=null;
+document.addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:reduce?'auto':'smooth'});});
+function show(){let v=location.hash.slice(1);if(!VIEWS.includes(v))v='home';
+  $$('.view').forEach(el=>{const on=el.dataset.view===v;el.hidden=!on;el.classList.remove('enter');if(on){void el.offsetWidth;el.classList.add('enter');runCounts(el);startLives(el);}});
+  $$('[data-nav]').forEach(a=>{if(a.dataset.nav===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  document.documentElement.style.setProperty('--dc',`var(${DC[v]})`);
+  const cur=$(`nav.main a[data-nav="${v}"]`);if(cur)cur.scrollIntoView({block:'nearest',inline:'nearest'});
+  if(!$('#lb').hidden)closeLB();window.scrollTo(0,0);}
+addEventListener('hashchange',show);show();
+
+/* ---------- Contact ---------- */
+document.addEventListener('click',e=>{const a=e.target.closest('a[data-topic]');if(a){$('#f-topic').value=a.dataset.topic;upd();}});
+function msg(){const n=$('#f-name').value.trim(),t=$('#f-topic').selectedOptions[0].text,m=$('#f-msg').value.trim();return `Hello Uriel${n?', this is '+n:''}. I'm interested in: ${t}.${m?' '+m:''}`;}
+function upd(){$('#waLink').href='https://wa.me/2349111222007?text='+encodeURIComponent(msg());}
+$('#enq').addEventListener('input',upd);$('#enq').addEventListener('submit',e=>e.preventDefault());upd();
+function selectNode(el){try{const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+function copy(text,st,ok,fb){try{navigator.clipboard.writeText(text).then(()=>st.textContent=ok,()=>{fb();st.textContent='Selected. Use your device\'s copy.';});}catch(e){fb();st.textContent='Selected. Use your device\'s copy.';}}
+$$('[data-copy]').forEach(b=>b.addEventListener('click',()=>copy(b.dataset.copy,$('#copyStatus'),'Copied: '+$('#'+b.dataset.for).textContent,()=>selectNode($('#'+b.dataset.for)))));
+$('#copyMsg').addEventListener('click',()=>copy(msg(),$('#msgStatus'),'Message copied. Paste it into WhatsApp.',()=>{const ta=$('#f-msg');ta.value=msg();ta.select();}));
+</script>
+
+</body>
+</html>
