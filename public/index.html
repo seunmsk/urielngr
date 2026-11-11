@@ -299,6 +299,7 @@ button.site:hover strong{color:var(--orange-ink)}
 @media (prefers-reduced-motion:reduce){.client:hover{transform:none}}
 .client .lg{height:130px;background:#fff;display:flex;align-items:center;justify-content:center;padding:14px;border-bottom:1px solid var(--rule);overflow:hidden}
 .client .lg img{max-width:100%;max-height:102px;width:auto;height:auto;object-fit:contain;display:block}
+.client .lgtxt{font-family:var(--display);font-size:24px;line-height:1.1;color:#262628;text-align:center}
 .client .ct{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
 .client strong{font-family:var(--display);font-weight:400;font-size:18px;line-height:1.2}
 .client small{color:var(--muted);font-size:13.5px}
@@ -574,7 +575,7 @@ footer a:hover{color:var(--ink)}
   </div>
   <div class="in sec">
     <div class="sechead"><div class="stack" style="gap:8px"><div class="mono">Partnerships</div><h2>Who we work with</h2></div></div>
-    <div class="partners"><span>Total</span><span>bp</span><span>Glencore</span><span>SOCAR</span><span>NNPC</span><span>NAPIMS</span><span>NipeX</span><span>Department of Petroleum Resources</span><span>Eterna</span></div>
+    <div class="clients" id="partners"></div>
   </div>
   <div class="in"><a class="next f-c" href="#farms"><div class="stack" style="gap:4px"><span class="mono">Next company</span><h3>Uriel Farms</h3></div><span class="arr">→</span></a></div>
 </section>
@@ -824,6 +825,10 @@ chipBar($('#recChips'),[['all','All types',R.length],...Object.entries(CAT).map(
 drawRec();
 const CL={};R.filter(r=>r.c).forEach(r=>{(CL[r.c]=CL[r.c]||[]).push(r.y)});
 $('#clients').innerHTML=Object.entries(CL).sort((a,b)=>b[1].length-a[1].length).map(([c,ys])=>`<div class="client">${LOGO[c]?`<div class="lg"><img src="img/client-${LOGO[c]}.png" alt="${esc(c)} logo" loading="lazy"></div>`:''}<div class="ct"><strong>${esc(c)}</strong><small>${ys.length} project${ys.length>1?'s':''} · ${Math.min(...ys)}${Math.max(...ys)!==Math.min(...ys)?'–'+Math.max(...ys):''}</small></div></div>`).join('');
+
+/* ---------- Oil and gas partners ---------- */
+$('#partners').innerHTML=[['TotalEnergies','totalenergies','International energy company'],['bp','bp','International energy company'],['Glencore','glencore','Commodity trading'],['SOCAR','socar','State Oil Company of Azerbaijan'],['NipeX','nipex','Nigerian Petroleum Exchange'],['NNPC','','Nigerian National Petroleum Company'],['NAPIMS','','National Petroleum Investment Management Services'],['Department of Petroleum Resources','','Industry regulator'],['Eterna','','Nigerian energy company']]
+ .map(([n,l,d])=>`<div class="client">${l?`<div class="lg"><img src="img/partner-${l}.png" alt="${esc(n)} logo" loading="lazy"></div>`:`<div class="lg"><span class="lgtxt">${esc(n)}</span></div>`}<div class="ct"><strong>${esc(n)}</strong><small>${esc(d)}</small></div></div>`).join('');
 
 /* ---------- Oil and gas products ---------- */
 $('#prods').innerHTML=[['Crude oil',''],['Naphtha',''],['Premium motor spirit','PMS'],['Dual purpose kerosene','DPK'],['Aviation turbine kerosene','ATK'],['Gasoil','AGO'],['Fuel oil',''],['Liquefied natural gas','LNG'],['Liquefied petroleum gas','LPG']].map(([n,a])=>`<span class="prod">${a?`<b>${a}</b>`:''}${n}</span>`).join('');
