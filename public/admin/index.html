@@ -136,6 +136,7 @@ main{padding-block:24px 80px}
   <nav class="tabs gut" role="tablist" aria-label="Sections">
     <button role="tab" data-tab="now" aria-selected="true">Now at Uriel</button>
     <button role="tab" data-tab="projects" aria-selected="false">Projects</button>
+    <button role="tab" data-tab="team" aria-selected="false">Team</button>
     <button role="tab" data-tab="contact" aria-selected="false">Contact details</button>
     <button role="tab" data-tab="text" aria-selected="false">Page text</button>
   </nav>
@@ -151,7 +152,7 @@ const COMP={p:'Uriel Properties',c:'Uriel Construction',g:'Uriel Oil and Gas',f:
 const STATUS={build:'Under construction / ongoing',design:'In design',done:'Completed'};
 const UTYPES={detached:'Detached house',semi:'Semi-detached house',terrace:'Terrace house',townhouse:'Town house',maisonette:'Maisonette',flat:'Flat / apartment',penthouse:'Penthouse',plot:'Plot',other:'Other unit'};
 const CATS={road:'Roads',school:'Schools',health:'Healthcare',civic:'Public buildings',comm:'Commercial'};
-const TEXT={properties:'Uriel Properties',construction:'Uriel Construction',oilgas:'Uriel Oil and Gas',farms:'Uriel Farms',ventures:'Uriel Integrated Ventures'};
+const TEXT={properties:'Uriel Properties',construction:'Uriel Construction',oilgas:'Uriel Oil and Gas',farms:'Uriel Farms',ventures:'Uriel Integrated Ventures',about:'About page'};
 const src=u=>!u?'':/^(https?:|\/)/.test(u)?u:'/'+u;
 let doc=null,dirty=false,tab='now',editing=null,projFilter='all';
 
@@ -181,6 +182,7 @@ async function openApp(){
   if(!r.ok) r=await fetch('/content-default.json',{cache:'no-store'});
   doc=await r.json();
   doc.now=doc.now||[];doc.projects=doc.projects||[];doc.contact=doc.contact||{};doc.text=doc.text||{};
+  if(!doc.team||!doc.milestones||!doc.text.about){try{const d=await (await fetch('/content-default.json',{cache:'no-store'})).json();doc.team=doc.team||d.team||[];doc.milestones=doc.milestones||d.milestones||[];if(!doc.text.about)doc.text.about=(d.text||{}).about||'';}catch(e){doc.team=doc.team||[];}}
   $('#app').hidden=false;render();
 }
 
@@ -205,8 +207,9 @@ $$('.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;editing=null;rend
 function render(){
   $$('.tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
   const v=$('#view');
+  if(editing&&editing.kind==='person') return renderTeam(v);
   if(editing) return renderEditor(v);
-  ({now:renderNow,projects:renderProjects,contact:renderContact,text:renderText})[tab](v);
+  ({now:renderNow,projects:renderProjects,team:renderTeam,contact:renderContact,text:renderText})[tab](v);
 }
 const coTag=k=>`<span class="co"><i style="background:var(--c-${k})"></i>${esc(COMP[k]||'')}</span>`;
 const thumb=ph=>`<div class="th">${ph&&ph[0]?`<img src="${esc(src(ph[0]))}" alt="" loading="lazy">`:'No photo'}</div>`;
@@ -323,6 +326,40 @@ function shrink(file){return new Promise((res,rej)=>{
   img.onload=()=>{const M=1600,k=Math.min(1,M/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
     c.getContext('2d').drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(url);c.toBlob(b=>b?res(b):rej(new Error('Could not read that photo.')),'image/jpeg',.82);};
   img.onerror=()=>{URL.revokeObjectURL(url);rej(new Error('Could not read that photo. Try a JPEG or PNG.'));};img.src=url;});}
+
+/* ---------- Team ---------- */
+const GROUPS={leader:'Leadership (large card)',team:'Team (small card)'};
+function renderTeam(v){
+  if(editing&&editing.kind==='person')return renderPerson(v);
+  v.innerHTML=`<div class="head"><div><h2>Team</h2><p>People on the About page. Leave the name blank to show "Name to come". Use ↑ ↓ to set the order.</p></div><button class="btn solid" id="addP">+ Add person</button></div>
+  <div class="list">${doc.team.map((x,i)=>`<div class="item"><div class="th">${x.photo?`<img src="${esc(src(x.photo))}" alt="">`:'No photo'}</div><div><div class="nm">${esc(x.name)||'<i>Name to come</i>'}</div><div class="meta"><span>${esc(x.title)}</span><span class="st ${x.group==='leader'?'build':'design'}">${x.group==='leader'?'Leadership':'Team'}</span></div></div>
+   <div class="acts"><button class="btn sm quiet" data-up="${i}" ${i?'':'disabled'} aria-label="Move up">↑</button><button class="btn sm quiet" data-down="${i}" ${i<doc.team.length-1?'':'disabled'} aria-label="Move down">↓</button><button class="btn sm" data-pedit="${i}">Edit</button><button class="btn sm danger" data-del="${i}">Remove</button></div></div>`).join('')||'<div class="empty">No people yet.</div>'}</div>`;
+  $('#addP').onclick=()=>{doc.team.push({name:'',title:'',group:'team',bio:'',photo:''});editing={kind:'person',i:doc.team.length-1,isNew:true};render();};
+  v.querySelectorAll('[data-pedit]').forEach(b=>b.onclick=()=>{editing={kind:'person',i:+b.dataset.pedit};render();scrollTo(0,0);});
+  wireList(v,doc.team,'person');
+}
+function renderPerson(v){
+  const x=doc.team[editing.i];
+  v.innerHTML=`<div class="head"><div><span class="mono">Team</span><h2>${editing.isNew?'New person':'Edit '+(esc(x.name)||esc(x.title)||'person')}</h2></div><button class="btn quiet" id="back">← Back to list</button></div>
+  <form class="editor" id="pf" novalidate>
+    <div class="row"><label class="f" for="p-name">Full name<input id="p-name" value="${esc(x.name)}" placeholder="e.g. Engr. Adebayo Okafor"></label>
+      <label class="f" for="p-title">Role or title<input id="p-title" value="${esc(x.title)}" placeholder="e.g. Head of Engineering"></label></div>
+    <label class="f" for="p-group">Where to show<select id="p-group">${Object.entries(GROUPS).map(([k,n])=>`<option value="${k}" ${k===x.group?'selected':''}>${n}</option>`).join('')}</select></label>
+    <label class="f" for="p-bio">Short bio (one or two lines)<textarea id="p-bio" placeholder="e.g. COREN-registered civil engineer with 15 years on Lagos residential and road projects.">${esc(x.bio)}</textarea></label>
+    <div class="grid2"><span class="mono">Photo · a clear head-and-shoulders picture works best</span><div class="photos" id="pph"></div></div>
+    <div class="foot"><button class="btn danger" type="button" id="p-del">Remove person</button><button class="btn solid" type="submit">Done</button></div>
+  </form>`;
+  const sync=()=>{x.name=$('#p-name').value.trim();x.title=$('#p-title').value.trim();x.group=$('#p-group').value;x.bio=$('#p-bio').value.trim();setDirty(true);};
+  $('#pf').addEventListener('input',sync);$('#pf').addEventListener('change',sync);
+  const drawP=()=>{const box=$('#pph');box.innerHTML=(x.photo?`<div class="ph"><img src="${esc(src(x.photo))}" alt=""><div class="pa"><button type="button" id="prm" aria-label="Remove photo">✕</button></div></div>`:'')+`<label class="addph">${x.photo?'Replace photo':'+ Add photo'}<input type="file" accept="image/*" id="pfile"></label>`;
+    const rm=$('#prm');if(rm)rm.onclick=()=>{x.photo='';setDirty(true);drawP();};
+    $('#pfile').onchange=async e=>{const f=e.target.files[0];if(!f)return;box.insertAdjacentHTML('afterbegin','<div class="ph up">Uploading…</div>');
+      try{const blob=await shrink(f);const r=await fetch('/api/photo',{method:'POST',headers:{'content-type':blob.type},body:blob});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||'Upload failed.');x.photo=j.url;setDirty(true);}catch(err){toast(err.message,true);}drawP();};};
+  drawP();
+  $('#back').onclick=()=>{if(editing.isNew&&!x.name&&!x.title)doc.team.splice(editing.i,1);editing=null;render();};
+  $('#pf').addEventListener('submit',e=>{e.preventDefault();sync();if(!x.title){toast('Add a role or title first.',true);$('#p-title').focus();return;}editing=null;render();toast('Saved in the dashboard. Press Publish changes to update the website.');});
+  $('#p-del').onclick=e=>{if(!confirmInline(e.currentTarget,'Tap to confirm'))return;doc.team.splice(editing.i,1);editing=null;setDirty(true);render();};
+}
 
 /* ---------- Contact ---------- */
 function renderContact(v){

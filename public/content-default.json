@@ -13,7 +13,8 @@
   "construction": "A fully integrated construction company. Our project managers, engineers and architects have delivered roads, classroom blocks and hospital works for Lagos State, Oyo State and the Federal Government.",
   "oilgas": "A full-service oil trading company, incorporated in Nigeria in 2008. We trade, market and distribute crude oil and petroleum products, backed by marine logistics and terminal operations.",
   "farms": "Uriel Farms is the group's agriculture business.",
-  "ventures": "The group's diversified business."
+  "ventures": "The group's diversified business.",
+  "about": "Uriel began in 2008 as an oil and gas trading company and built its first homes in Lekki a year later. Today the group has five companies and has delivered more than 160 homes in Ikoyi, Victoria Island and Lekki, along with roads, schools and hospital works for Lagos State, Oyo State and the Federal Government."
  },
  "now": [
   {
@@ -491,6 +492,98 @@
     "img/alausa-5.jpg"
    ],
    "category": "civic"
+  }
+ ],
+ "team": [
+  {
+   "name": "",
+   "title": "Chairman and Founder",
+   "group": "leader",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Managing Director",
+   "group": "leader",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Head of Engineering",
+   "group": "team",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Project Manager",
+   "group": "team",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Structural Engineer",
+   "group": "team",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Architect",
+   "group": "team",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "",
+   "title": "Quantity Surveyor",
+   "group": "team",
+   "bio": "",
+   "photo": ""
+  },
+  {
+   "name": "Site engineering team",
+   "title": "Site engineers and supervisors",
+   "group": "team",
+   "bio": "The engineers who run Uriel sites day to day across Ikoyi, Lekki and Ibeju-Lekki.",
+   "photo": ""
+  }
+ ],
+ "milestones": [
+  {
+   "year": "2008",
+   "text": "Uriel Oil and Gas is incorporated in Nigeria and begins trading crude oil and petroleum products."
+  },
+  {
+   "year": "2009",
+   "text": "First homes: Twinny Court, 11 four-bedroom terrace houses in Osapa, Lekki."
+  },
+  {
+   "year": "2010",
+   "text": "First federal contract: roads, drainage and power for Ayedun Olorunsogo and Badore, Ajah."
+  },
+  {
+   "year": "2011",
+   "text": "Road rehabilitation for the Oyo State Ministry of Works, starting with 4 km of the Oke Ola road."
+  },
+  {
+   "year": "2016",
+   "text": "Eight residential developments delivered in one year across Oniru, Parkview and Lekki."
+  },
+  {
+   "year": "2020",
+   "text": "An 18-classroom block at GTC Ikotun and hospital remodelling for Lagos State."
+  },
+  {
+   "year": "2023",
+   "text": "Dyo Korones Court completed, and five school renovations for Lagos State."
+  },
+  {
+   "year": "Today",
+   "text": "The Uriel Precinct, 22 Bourdillon, Banana Island and Bedwell under construction."
   }
  ]
 }
