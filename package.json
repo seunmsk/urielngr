@@ -1,0 +1,8 @@
+{
+  "name": "urielngr",
+  "private": true,
+  "description": "Uriel group website. Static files live in public/; there is nothing to build.",
+  "scripts": {
+    "build": "echo \"Static site: nothing to build. Output directory is public/.\""
+  }
+}
