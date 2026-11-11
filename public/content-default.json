@@ -88,12 +88,20 @@
    "location": "Ostia Island, Lekki Foreshore",
    "status": "build",
    "year": "Under construction",
-   "description": "154 detached five-bedroom homes, each on a 500 m² plot with a private pool and C of O.",
+   "description": "Every home has a private pool, two BQ rooms and a C of O.",
    "photos": [
     "img/precinct-a.jpg",
     "img/precinct-b.jpg",
     "img/precinct-c.jpg"
-   ]
+   ],
+   "units": [
+    {
+     "type": "detached",
+     "count": 154,
+     "beds": 5
+    }
+   ],
+   "unitsNote": "Each on a 500 m² plot"
   },
   {
    "id": "bourd",
@@ -102,14 +110,32 @@
    "location": "Bourdillon, Ikoyi",
    "status": "build",
    "year": "Under construction",
-   "description": "8 town houses, 8 maisonettes and 2 penthouses across two blocks. The structure is up; cladding, glazing and balconies are going in.",
+   "description": "The structure is up; cladding, glazing and balconies are going in.",
    "photos": [
     "img/bourd-site-1.jpg",
     "img/bourd-site-2.jpg",
     "img/bourd-1.jpg",
     "img/bourd-2.jpg"
    ],
-   "home": true
+   "home": true,
+   "units": [
+    {
+     "type": "townhouse",
+     "count": 8,
+     "beds": 0
+    },
+    {
+     "type": "maisonette",
+     "count": 8,
+     "beds": 0
+    },
+    {
+     "type": "penthouse",
+     "count": 2,
+     "beds": 0
+    }
+   ],
+   "unitsNote": "Across 2 blocks"
   },
   {
    "id": "banana",
@@ -118,13 +144,20 @@
    "location": "Banana Island, Ikoyi",
    "status": "build",
    "year": "Under construction",
-   "description": "4 four-bedroom semi-detached homes. The four-storey blocks are up with windows in.",
+   "description": "The four-storey blocks are up with windows in.",
    "photos": [
     "img/banana-1.jpg",
     "img/banana-2.jpg",
     "img/banana-3.jpg"
    ],
-   "home": true
+   "home": true,
+   "units": [
+    {
+     "type": "semi",
+     "count": 4,
+     "beds": 4
+    }
+   ]
   },
   {
    "id": "bedwell",
@@ -133,9 +166,36 @@
    "location": "Bedwell, Ikoyi",
    "status": "build",
    "year": "Under construction",
-   "description": "2 four-bedroom detached houses, 4 four-bedroom semi-detached houses, 5 four-bedroom terraces, 4 three-bedroom flats and 2 four-bedroom maisonettes. The blocks are up and rendered.",
+   "description": "The blocks are up and rendered, with scaffolding still in place.",
    "photos": [
     "img/bedwell-1.jpg"
+   ],
+   "units": [
+    {
+     "type": "detached",
+     "count": 2,
+     "beds": 4
+    },
+    {
+     "type": "semi",
+     "count": 4,
+     "beds": 4
+    },
+    {
+     "type": "terrace",
+     "count": 5,
+     "beds": 4
+    },
+    {
+     "type": "flat",
+     "count": 4,
+     "beds": 3
+    },
+    {
+     "type": "maisonette",
+     "count": 2,
+     "beds": 4
+    }
    ]
   },
   {
@@ -145,8 +205,10 @@
    "location": "Alexander Avenue, Ikoyi",
    "status": "build",
    "year": "Under construction",
-   "description": "Apartment development across two blocks.",
-   "photos": []
+   "description": "Apartment development.",
+   "photos": [],
+   "units": [],
+   "unitsNote": "2 blocks · unit count to be confirmed"
   },
   {
    "id": "periwinkle",
@@ -155,8 +217,16 @@
    "location": "Behind Holy Trinity Catholic Church",
    "status": "build",
    "year": "Under construction",
-   "description": "16 detached houses.",
-   "photos": []
+   "description": "",
+   "photos": [],
+   "units": [
+    {
+     "type": "detached",
+     "count": 16,
+     "beds": 0
+    }
+   ],
+   "unitsNote": "Behind Holy Trinity Catholic Church"
   },
   {
    "id": "stonebridge",
@@ -165,8 +235,20 @@
    "location": "Lekki Phase 1",
    "status": "build",
    "year": "Under construction",
-   "description": "6 three-bedroom units and 2 two-bedroom units.",
-   "photos": []
+   "description": "",
+   "photos": [],
+   "units": [
+    {
+     "type": "flat",
+     "count": 6,
+     "beds": 3
+    },
+    {
+     "type": "flat",
+     "count": 2,
+     "beds": 2
+    }
+   ]
   },
   {
    "id": "height",
@@ -230,14 +312,26 @@
    "location": "Victoria Island",
    "status": "done",
    "year": "2023",
-   "description": "8 three-bedroom and 2 two-bedroom flats.",
+   "description": "",
    "photos": [
     "img/dyo-1.jpg",
     "img/dyo-2.jpg",
     "img/dyo-3.jpg",
     "img/dyo-4.jpg"
    ],
-   "home": true
+   "home": true,
+   "units": [
+    {
+     "type": "flat",
+     "count": 8,
+     "beds": 3
+    },
+    {
+     "type": "flat",
+     "count": 2,
+     "beds": 2
+    }
+   ]
   },
   {
    "id": "virgo",
@@ -246,7 +340,7 @@
    "location": "Shoreline Estate, Ikoyi",
    "status": "done",
    "year": "2022",
-   "description": "4 three-bedroom flats and 2 four-bedroom maisonettes.",
+   "description": "",
    "photos": [
     "img/virgo-1.jpg",
     "img/virgo-2.jpg",
@@ -254,7 +348,19 @@
     "img/virgo-4.jpg",
     "img/virgo-5.jpg"
    ],
-   "home": true
+   "home": true,
+   "units": [
+    {
+     "type": "flat",
+     "count": 4,
+     "beds": 3
+    },
+    {
+     "type": "maisonette",
+     "count": 2,
+     "beds": 4
+    }
+   ]
   },
   {
    "id": "vienna",
@@ -263,10 +369,22 @@
    "location": "Lekki Phase 1",
    "status": "done",
    "year": "2022",
-   "description": "8 three-bedroom flats and 2 four-bedroom maisonettes.",
+   "description": "",
    "photos": [
     "img/vienna-1.jpg",
     "img/vienna-2.jpg"
+   ],
+   "units": [
+    {
+     "type": "flat",
+     "count": 8,
+     "beds": 3
+    },
+    {
+     "type": "maisonette",
+     "count": 2,
+     "beds": 4
+    }
    ]
   },
   {

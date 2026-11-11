@@ -91,7 +91,12 @@ main{padding-block:24px 80px}
 .addph:hover{border-color:var(--ink);color:var(--ink)}
 .addph input{position:absolute;width:1px;height:1px;opacity:0}
 .foot{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;border-top:1px solid var(--rule);padding-top:16px}
-.grid2{display:grid;gap:16px}
+.grid2{display:grid;gap:12px}
+.uhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.utotal{font-family:var(--display);font-size:20px}
+.urows{display:grid;gap:8px;margin-bottom:10px}
+.urow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.8fr) minmax(0,.8fr) auto;gap:10px;align-items:end;background:var(--paper);padding:10px;border:1px solid var(--rule)}
+@media (max-width:520px){.urow{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}.urow label:first-child{grid-column:1/-1}}
 
 /* Login */
 .login{min-height:100vh;display:grid;place-items:center;padding:24px}
@@ -144,6 +149,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const COMP={p:'Uriel Properties',c:'Uriel Construction',g:'Uriel Oil and Gas',f:'Uriel Farms',v:'Uriel Integrated Ventures'};
 const STATUS={build:'Under construction / ongoing',design:'In design',done:'Completed'};
+const UTYPES={detached:'Detached house',semi:'Semi-detached house',terrace:'Terrace house',townhouse:'Town house',maisonette:'Maisonette',flat:'Flat / apartment',penthouse:'Penthouse',plot:'Plot',other:'Other unit'};
 const CATS={road:'Roads',school:'Schools',health:'Healthcare',civic:'Public buildings',comm:'Commercial'};
 const TEXT={properties:'Uriel Properties',construction:'Uriel Construction',oilgas:'Uriel Oil and Gas',farms:'Uriel Farms',ventures:'Uriel Integrated Ventures'};
 const src=u=>!u?'':/^(https?:|\/)/.test(u)?u:'/'+u;
@@ -218,7 +224,7 @@ function renderProjects(v){
   const L=doc.projects.map((p,i)=>[p,i]).filter(([p])=>projFilter==='all'||p.company===projFilter);
   v.innerHTML=`<div class="head"><div><h2>Projects</h2><p>Every project shown on the company pages. Projects without photos appear in the "photos coming" list.</p></div><button class="btn solid" id="addProj">+ Add project</button></div>
   <div class="chips">${[['all','All'],...Object.entries(COMP).map(([k,n])=>[k,n.replace('Uriel ','')])].map(([k,n])=>`<button class="chip" data-f="${k}" aria-pressed="${projFilter===k}">${esc(n)} (${k==='all'?doc.projects.length:doc.projects.filter(p=>p.company===k).length})</button>`).join('')}</div>
-  <div class="list">${L.map(([p,i])=>`<div class="item">${thumb(p.photos)}<div><div class="nm">${esc(p.name)||'<i>Untitled</i>'}</div><div class="meta">${coTag(p.company)}<span class="st ${p.status}">${STATUS[p.status]||''}</span><span>${esc(p.location)}</span>${p.home?'<span>· On home page</span>':''}</div></div>
+  <div class="list">${L.map(([p,i])=>`<div class="item">${thumb(p.photos)}<div><div class="nm">${esc(p.name)||'<i>Untitled</i>'}</div><div class="meta">${coTag(p.company)}<span class="st ${p.status}">${STATUS[p.status]||''}</span><span>${esc(p.location)}</span>${(p.units||[]).length?`<span>· ${(p.units||[]).reduce((a,u)=>a+(+u.count||0),0)} units</span>`:''}${p.home?'<span>· On home page</span>':''}</div></div>
    <div class="acts"><button class="btn sm" data-edit="${i}">Edit</button><button class="btn sm danger" data-del="${i}">Remove</button></div></div>`).join('')||'<div class="empty">No projects for this company yet.</div>'}</div>`;
   v.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{projFilter=b.dataset.f;render();});
   $('#addProj').onclick=()=>{doc.projects.unshift({id:'p'+Date.now().toString(36),company:projFilter==='all'?'p':projFilter,name:'',location:'',status:'build',year:'',description:'',photos:[]});editing={kind:'project',i:0,isNew:true};render();};
@@ -250,6 +256,8 @@ function renderEditor(v){
     <label class="f" for="e-txt">${isNow?'What is happening (one or two sentences)':'Description'}<textarea id="e-txt" placeholder="${isNow?'e.g. The structure is up. Cladding and glazing are going in.':'e.g. 8 three-bedroom flats and 2 maisonettes.'}">${esc(isNow?it.text:it.description)}</textarea></label>
     ${isNow?'':`<div class="row"><label class="f" for="e-cat" ${it.company==='c'?'':'hidden'} id="catWrap">Type of work<select id="e-cat"><option value="">None</option>${opt(CATS,it.category)}</select></label>
       <label class="check" for="e-home"><input type="checkbox" id="e-home" ${it.home?'checked':''}> Show on the home page (up to 6)</label></div>`}
+    ${isNow?'':`<div class="grid2"><div class="uhead"><span class="mono">Units</span><span class="utotal" id="utot"></span></div><div id="units"></div>
+      <label class="f" for="e-unote">Note beside the total (optional)<input id="e-unote" value="${esc(it.unitsNote)}" placeholder="e.g. Across 2 blocks"></label></div>`}
     <div class="grid2"><span class="mono">Photos · the first one is the cover</span><div class="photos" id="phs"></div></div>
     <div class="foot"><button class="btn danger" type="button" id="e-del">Remove ${isNow?'update':'project'}</button><button class="btn solid" type="submit">Done</button></div>
   </form>`;
@@ -258,7 +266,8 @@ function renderEditor(v){
     if(isNow){it.title=$('#e-name').value.trim();it.text=$('#e-txt').value.trim();}
     else{it.name=$('#e-name').value.trim();it.description=$('#e-txt').value.trim();it.year=$('#e-yr').value.trim();
       const cat=$('#e-cat').value;if(it.company==='c'&&cat)it.category=cat;else delete it.category;
-      if($('#e-home').checked)it.home=true;else delete it.home;}
+      if($('#e-home').checked)it.home=true;else delete it.home;
+      const un=$('#e-unote').value.trim();if(un)it.unitsNote=un;else delete it.unitsNote;}
     setDirty(true);
   };
   $('#ed').addEventListener('input',sync);$('#ed').addEventListener('change',sync);
@@ -271,7 +280,24 @@ function renderEditor(v){
     if(isNow&&!(it.photos||[]).length){toast('Add at least one photo so the update can show on the home page.',true);return;}
     editing=null;render();toast('Saved in the dashboard. Press Publish changes to update the website.');});
   $('#e-del').onclick=e=>{if(!confirmInline(e.currentTarget,'Tap to confirm'))return;arr.splice(editing.i,1);editing=null;setDirty(true);render();toast('Removed. Publish to update the website.');};
+  if(!isNow)drawUnits(it);
   drawPhotos(it);
+}
+function drawUnits(it){
+  it.units=it.units||[];const box=$('#units');
+  const opt=sel=>Object.entries(UTYPES).map(([k,n])=>`<option value="${k}" ${k===sel?'selected':''}>${esc(n)}</option>`).join('');
+  box.innerHTML=`<div class="urows">${it.units.map((u,i)=>`<div class="urow">
+     <label class="f">Type<select data-u="${i}" data-k="type">${opt(u.type)}</select></label>
+     <label class="f">How many<input type="number" min="1" inputmode="numeric" data-u="${i}" data-k="count" value="${esc(u.count)}"></label>
+     <label class="f">Bedrooms<input type="number" min="0" inputmode="numeric" data-u="${i}" data-k="beds" value="${esc(u.beds||'')}" placeholder="—"></label>
+     <button type="button" class="btn sm danger" data-urm="${i}" aria-label="Remove this unit type">✕</button></div>`).join('')}</div>
+     <button type="button" class="btn sm" id="uadd">+ Add unit type</button>`;
+  const tot=()=>{const t=it.units.reduce((a,u)=>a+(+u.count||0),0);$('#utot').textContent=t?`Total: ${t} unit${t>1?'s':''}`:'No units yet';};
+  box.querySelectorAll('[data-u]').forEach(el=>el.addEventListener('input',e=>{e.stopPropagation();const u=it.units[+el.dataset.u],k=el.dataset.k;u[k]=k==='type'?el.value:(el.value===''?0:Math.max(0,parseInt(el.value,10)||0));tot();setDirty(true);}));
+  box.querySelectorAll('select[data-u]').forEach(el=>el.addEventListener('change',e=>{e.stopPropagation();it.units[+el.dataset.u].type=el.value;setDirty(true);}));
+  box.querySelectorAll('[data-urm]').forEach(b=>b.onclick=()=>{it.units.splice(+b.dataset.urm,1);setDirty(true);drawUnits(it);});
+  $('#uadd').onclick=()=>{it.units.push({type:'flat',count:1,beds:3});setDirty(true);drawUnits(it);};
+  tot();
 }
 function drawPhotos(it){
   it.photos=it.photos||[];const box=$('#phs');
