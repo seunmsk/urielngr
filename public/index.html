@@ -293,10 +293,15 @@ button.site:hover strong{color:var(--orange-ink)}
 .quote p{font-family:var(--display);font-size:clamp(20px,2.6vw,28px);line-height:1.3;max-width:60ch}
 .values strong{font-family:var(--display);font-weight:400;font-size:28px;color:var(--orange-ink)}
 .values p{color:var(--muted)}
-.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));border-top:2px solid var(--ink)}
-.clients div{padding:14px 14px 14px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:4px}
-.clients strong{font-family:var(--display);font-weight:400;font-size:19px;line-height:1.2}
-.clients small{color:var(--muted)}
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:14px}
+.client{background:var(--sheet);border:1px solid var(--rule);display:flex;flex-direction:column;min-width:0;transition:border-color .2s,transform .2s}
+.client:hover{border-color:var(--ink);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.client:hover{transform:none}}
+.client .lg{height:130px;background:#fff;display:flex;align-items:center;justify-content:center;padding:14px;border-bottom:1px solid var(--rule);overflow:hidden}
+.client .lg img{max-width:100%;max-height:102px;width:auto;height:auto;object-fit:contain;display:block}
+.client .ct{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px}
+.client strong{font-family:var(--display);font-weight:400;font-size:18px;line-height:1.2}
+.client small{color:var(--muted);font-size:13.5px}
 
 /* Coming soon */
 .soon{border:1px dashed var(--muted);padding:32px 22px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
@@ -697,6 +702,7 @@ const PI=Object.fromEntries(P.map(p=>[p.id,p]));
 const STL={live:'Selling now',build:'Under construction',design:'In design',done:'Completed'};
 
 /* ---------- Record ---------- */
+const LOGO={'Federal Ministry of Lands, Housing & Urban Development':'fmhud','Oyo State Ministry of Works & Transport':'oyo','Lagos State Infrastructure Asset Management Agency (LASIAMA)':'lasiama','Lagos State Technical and Vocational Education Board (LASTVEB)':'lastveb','Lagos State Ministry of Housing':'lagoshousing'};
 const FMH='Federal Ministry of Lands, Housing & Urban Development',OYO='Oyo State Ministry of Works & Transport',LASIAMA='Lagos State Infrastructure Asset Management Agency (LASIAMA)',LASTVEB='Lagos State Technical and Vocational Education Board (LASTVEB)',LMH='Lagos State Ministry of Housing';
 const R=[
  [2009,'Twinny Court','11 four-bedroom terrace houses','Osapa, Lekki','','home'],
@@ -817,7 +823,7 @@ function drawRec(){drawYears();const L=R.filter(r=>(fy==null||r.y===fy)&&(fc==='
 chipBar($('#recChips'),[['all','All types',R.length],...Object.entries(CAT).map(([k,l])=>[k,l,R.filter(r=>r.cat===k).length])],'all',v=>{fc=v;recAll=false;drawRec();});
 drawRec();
 const CL={};R.filter(r=>r.c).forEach(r=>{(CL[r.c]=CL[r.c]||[]).push(r.y)});
-$('#clients').innerHTML=Object.entries(CL).sort((a,b)=>b[1].length-a[1].length).map(([c,ys])=>`<div><strong>${esc(c)}</strong><small>${ys.length} project${ys.length>1?'s':''} · ${Math.min(...ys)}${Math.max(...ys)!==Math.min(...ys)?'–'+Math.max(...ys):''}</small></div>`).join('');
+$('#clients').innerHTML=Object.entries(CL).sort((a,b)=>b[1].length-a[1].length).map(([c,ys])=>`<div class="client">${LOGO[c]?`<div class="lg"><img src="img/client-${LOGO[c]}.png" alt="${esc(c)} logo" loading="lazy"></div>`:''}<div class="ct"><strong>${esc(c)}</strong><small>${ys.length} project${ys.length>1?'s':''} · ${Math.min(...ys)}${Math.max(...ys)!==Math.min(...ys)?'–'+Math.max(...ys):''}</small></div></div>`).join('');
 
 /* ---------- Oil and gas products ---------- */
 $('#prods').innerHTML=[['Crude oil',''],['Naphtha',''],['Premium motor spirit','PMS'],['Dual purpose kerosene','DPK'],['Aviation turbine kerosene','ATK'],['Gasoil','AGO'],['Fuel oil',''],['Liquefied natural gas','LNG'],['Liquefied petroleum gas','LPG']].map(([n,a])=>`<span class="prod">${a?`<b>${a}</b>`:''}${n}</span>`).join('');
