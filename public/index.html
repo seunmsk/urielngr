@@ -86,7 +86,33 @@ nav.main a .dot{width:7px;height:7px}
 nav.main a:hover{color:var(--ink)}
 nav.main a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--dc)}
 nav.main a.cta{background:var(--orange);color:#fff;border-bottom-color:var(--orange);margin-left:8px}
-@media (max-width:900px){header.top .in{flex-wrap:wrap;height:auto;padding-block:8px;gap:4px}nav.main{margin-left:0;width:100%}nav.main a{padding:8px 8px;font-size:10.5px}}
+.mbar{display:none;margin-left:auto;gap:8px;align-items:center}
+.mbar a,.mbar button{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;min-height:42px;padding:0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.mbar .mcta{background:var(--orange);color:#fff;border:1px solid var(--orange)}
+.mbar .mbtn{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.mbtn svg{width:18px;height:14px}
+@media (max-width:900px){nav.main{display:none}.mbar{display:flex}header.top .in{height:62px}.brand img{width:72px}}
+/* Phone menu panel */
+.mnav{position:fixed;inset:0;z-index:40;background:var(--paper);overflow-y:auto;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));animation:mnin .22s ease both}
+@keyframes mnin{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.mnav{animation:none}}
+.mnav .mtop{display:flex;align-items:center;justify-content:space-between;height:62px;border-bottom:1px solid var(--rule)}
+.mnav .mtop img{width:72px;height:auto}
+.mnav .mclose{background:transparent;border:1px solid var(--ink);color:var(--ink);min-height:42px;padding:0 14px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.mnav .mlbl{margin:18px 0 8px}
+.mco{display:grid;grid-template-columns:4px 64px minmax(0,1fr) auto;gap:12px;align-items:center;text-decoration:none;padding:10px 0;border-bottom:1px solid var(--rule)}
+.mco::before{content:"";align-self:stretch;background:var(--dc)}
+.mco .th{width:64px;height:48px;background:var(--sheet);overflow:hidden;display:grid;place-items:center;color:var(--dc)}
+.mco .th img{width:100%;height:100%;object-fit:cover}
+.mco .th svg{width:40px}
+.mco b{display:block;font-family:var(--display);font-weight:400;font-size:21px;line-height:1.15}
+.mco small{display:block;color:var(--muted);font-size:13.5px;line-height:1.3}
+.mco .ar{font-family:var(--display);font-size:22px;color:var(--muted)}
+.mco[aria-current="page"] b{color:var(--orange-ink)}
+.mlinks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.mlinks a{text-decoration:none;border:1px solid var(--ink);min-height:50px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.mlinks a.solid{background:var(--orange);border-color:var(--orange);color:#fff}
+.mnav .mfoot{margin-top:18px;color:var(--muted);font-size:14px;line-height:1.6}
 .band{height:4px;background:linear-gradient(90deg,var(--c-prop) 0 40%,var(--c-con) 40% 55%,var(--c-gas) 55% 70%,var(--c-farm) 70% 85%,var(--c-vent) 85% 100%)}
 
 /* Views */
@@ -452,8 +478,20 @@ footer a:hover{color:var(--ink)}
       <a href="#about" data-nav="about">About</a>
       <a href="#contact" data-nav="contact" class="cta">Contact</a>
     </nav>
+    <div class="mbar"><a class="mcta" href="#contact">Contact</a><button class="mbtn" id="menuBtn" type="button" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 2h16M1 7h16M1 12h16"/></svg>Menu</button></div>
   </div>
 </header>
+<div class="mnav" id="mnav" hidden role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="mtop"><a href="#home" data-mnav="home" aria-label="Uriel home" style="line-height:0"><img class="lg-light" src="img/logo.png" alt="Uriel"><img class="lg-dark" src="img/logo-dark.png" alt="Uriel"></a><button class="mclose" id="menuClose" type="button">Close ✕</button></div>
+  <div class="mono mlbl">Our companies</div>
+  <a class="mco p-c" href="#properties" data-mnav="properties"><span class="th"><img src="img/precinct-a.jpg" alt="" loading="lazy"></span><span><b>Uriel Properties</b><small>Homes and estates in Ikoyi, VI and Lekki</small></span><span class="ar">→</span></a>
+  <a class="mco c-c" href="#construction" data-mnav="construction"><span class="th"><img src="img/ibadan-1.jpg" alt="" loading="lazy"></span><span><b>Uriel Construction</b><small>Roads, schools and public works</small></span><span class="ar">→</span></a>
+  <a class="mco g-c" href="#oilgas" data-mnav="oilgas"><span class="th"><img src="img/og-platforms.jpg" alt="" loading="lazy" style="object-position:center 70%"></span><span><b>Uriel Oil and Gas</b><small>Crude oil and petroleum product trading</small></span><span class="ar">→</span></a>
+  <a class="mco f-c" href="#farms" data-mnav="farms"><span class="th"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="72" cy="16" r="7"/><path d="M4 58c20-12 68-12 88 0M12 50c18-9 54-9 72 0M24 43c12-5 36-5 48 0"/><path d="M28 30v10M48 26v12"/></svg></span><span><b>Uriel Farms</b><small>Farming and fresh produce</small></span><span class="ar">→</span></a>
+  <a class="mco v-c" href="#ventures" data-mnav="ventures"><span class="th"><svg viewBox="0 0 96 64" fill="none" stroke="currentColor" stroke-width="3"><circle cx="48" cy="32" r="9"/><circle cx="18" cy="14" r="6"/><circle cx="78" cy="14" r="6"/><circle cx="18" cy="52" r="6"/><circle cx="78" cy="52" r="6"/><path d="M23 17l17 9M73 17l-17 9M23 49l17-9M73 49l-17-9"/></svg></span><span><b>Uriel Integrated Ventures</b><small>The group's diversified business</small></span><span class="ar">→</span></a>
+  <div class="mlinks"><a href="#about" data-mnav="about">About Uriel</a><a class="solid" href="#contact" data-mnav="contact">Contact us</a></div>
+  <p class="mfoot"><span data-c="phone1">0911 122 2007</span> · <span data-c="email1">info@urielngr.com</span><br><span data-c="address">2B Niyi Okunubi Street, Lekki Phase 1, Lagos</span></p>
+</div>
 <div class="band" aria-hidden="true"></div>
 
 <main>
@@ -1057,6 +1095,14 @@ $('#lb').addEventListener('click',e=>{if(e.target.id==='lbStage')closeLB();});
 document.addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft'){ci--;showLB();}if(e.key==='ArrowRight'){ci++;showLB();}});
 let sx=null;$('#lbStage').addEventListener('pointerdown',e=>{sx=e.clientX;});$('#lbStage').addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx;sx=null;if(Math.abs(dx)>40){ci+=dx<0?1:-1;showLB();}});
 
+/* ---------- Phone menu ---------- */
+const mnav=$('#mnav'),mbtn=$('#menuBtn');
+function menu(open){mnav.hidden=!open;mbtn.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';if(open)$('#menuClose').focus();else if(document.activeElement&&mnav.contains(document.activeElement))mbtn.focus();}
+mbtn.onclick=()=>menu(true);$('#menuClose').onclick=()=>menu(false);
+mnav.addEventListener('click',e=>{if(e.target.closest('a'))menu(false);});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!mnav.hidden)menu(false);});
+addEventListener('resize',()=>{if(!mnav.hidden&&innerWidth>900)menu(false);});
+
 /* ---------- Routing ---------- */
 const VIEWS=['home','properties','construction','oilgas','farms','ventures','about','contact'];
 const DC={home:'--orange',properties:'--c-prop',construction:'--c-con',oilgas:'--c-gas',farms:'--c-farm',ventures:'--c-vent',about:'--orange',contact:'--orange'};
@@ -1064,7 +1110,7 @@ let jumpTo=null;
 document.addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:reduce?'auto':'smooth'});});
 function show(){let v=location.hash.slice(1);if(!VIEWS.includes(v))v='home';
   $$('.view').forEach(el=>{const on=el.dataset.view===v;el.hidden=!on;el.classList.remove('enter');if(on){void el.offsetWidth;el.classList.add('enter');runCounts(el);startLives(el);if(window.nowRestart)setTimeout(window.nowRestart,0);requestAnimationFrame(pack);}});
-  $$('[data-nav]').forEach(a=>{if(a.dataset.nav===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  $$('[data-nav],[data-mnav]').forEach(a=>{if((a.dataset.nav||a.dataset.mnav)===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
   document.documentElement.style.setProperty('--dc',`var(${DC[v]})`);
   const cur=$(`nav.main a[data-nav="${v}"]`);if(cur)cur.scrollIntoView({block:'nearest',inline:'nearest'});
   if(!$('#lb').hidden)closeLB();window.scrollTo(0,0);}
